@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/style_home.css">
+</head>
+
+<body>
+    <nav>
+        <label id="logo">ShopName</label>
+        <form action="" method="post">
+            <label>
+                <input type="text" placeholder="Search for product" name="search" autocomplete="off" required>
+            </label>
+            <button type="submit">Search</button>
+        </form>
+        <ul>
+            <li id="home"><a href="/home">Home</a></li>
+            <li id="help"><a href="help">Help</a></li>
+            <li id="cart"><a href="cart">Cart<span ></span></a></li>
+<!--            <% if(user != null) { %>-->
+            <li id="my-account"> <a   href="">  </a></li>
+
+        </ul>
+        <ul>
+            <li><a href="">Laptop</a></li>
+            <li><a href="">Smartphone</a></li>
+            <li><a href="">Tablet</a></li>
+            <li><a href="">Screen</a></li>
+            <!-- Thêm các m?c danh m?c s?n ph?m khác t?i ?ây -->
+        </ul>
+
+    </nav>
+
+        <div id="product-categories">
+            <ul>
+                <li><a href="#">Category 1</a></li>
+                <li><a href="#">Category 2</a></li>
+                <li><a href="#">Category 3</a></li>
+            </ul>
+        </div>
+
+    <div id="banner">
+        <div class="slideshow-container">
+            <div class="slide">
+                <img src="/img/home_bg.png">
+                <div class="slide-caption">
+                    TEXT CAPTION 1
+                </div>
+            </div>
+            <div class="slide">
+                <img src="/img/home_bg1.png">
+                <div class="slide-caption">
+                    TEXT CAPTION 2
+                </div>
+            </div>
+            <div class="slide">
+                <img src="/img/home_bg2.png">
+                <div class="slide-caption">
+                    TEXT CAPTION 3
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="shock-deals" class="product-list">
+        <div class="product-list-caption">
+            <h2>Shock Deals</h2>
+        </div>
+<!--        <div class="product-container">-->
+<!--            <div class="product">-->
+<!--                <img src="/img/pc.jpg">-->
+<!--                <a href="detail-product?prod_id=<%=i%>" class="product-name">Sample Product</a>-->
+<!--                <div class="product-discount-label">-20&percnt;</div>-->
+<!--                <div class="product-original-price">100000</div>-->
+<!--                <div class="product-price">80000</div>-->
+<!--                <a href="add-cart?id=<%=i%>"><button  >Add to Cart</button></a>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="product-container">
+            <div th:each="product : ${products}" class="product">
+
+                <img th:src="${product.getProdImg()}">
+                <a th:href="@{'/detail-product?prod_id=' + ${product.getProdId()}}" class="product-name" th:text="${product.getProdName()}">Sample Product</a>
+<!--                 S? d?ng logic Thymeleaf ?? ki?m tra và hi?n th? nhãn gi?m giá -->
+                <div class="product-discount-label" th:if="${20}">&minus;20%</div>
+                <div class="product-original-price" th:text="${product.getProdPrice()}"></div>
+                <div class="product-price" th:text="${product.getProdPrice()}"></div>
+                <!-- Thêm s?n ph?m vào gi? hàng v?i mã s?n ph?m là product.id -->
+                <a th:href="@{'/add-cart?id=' + ${product.getProdId()}}"><button style="background-color: #ac2925; font-size: 20px; border-bottom-color: #4cae4c; border-radius: 10px">Add to Cart</button></a>
+            </div>
+        </div>
+
+        <div class="watch-more">
+            <a href="https://portal.ptit.edu.vn/">Watch More >>></a>
+        </div>
+    </div>
+
+    <div id="best-sellers" class="product-list">
+        <div class="product-list-caption">
+            <h2>Best Sellers</h2>
+        </div>
+        <div class="product-container">
+            <div class="product">
+                <img src="/img/laptop.jpg">
+                <a href="" class="product-name">Sample Product</a>
+                <div class="product-discount-label">-20&percnt;</div>
+                <div class="product-original-price">100000</div>
+                <div class="product-price">80000</div>
+            </div>
+        </div>
+        <div class="watch-more">
+            <a href="">Watch More >>></a>
+        </div>
+    </div>
+
+    <div id="new-releases" class="product-list">
+        <div class="product-list-caption">
+            <h2>New Releases</h2>
+        </div>
+        <div class="product-container">
+            <div class="product">
+                <img src="/img/keyboard_mouse.jpg">
+                <a href="" class="product-name">Sample Product</a>
+                <div class="product-discount-label">-20&percnt;</div>
+                <div class="product-original-price">100000</div>
+                <div class="product-price">80000</div>
+            </div>
+        </div>
+        <div class="watch-more">
+            <a href="">Watch More >>></a>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 4000);
+        }
+    </script>
+
+
+</body>
+
+</html>

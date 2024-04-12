@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSP - Hello World</title>
+</head>
+<body>
+<h1><%= "Hello World!" %>
+</h1>
+<br/>
+
+<div class="login">
+    <a href="https://code.ptit.edu.vn/student/question"><button> CLick here</button></a>
+    <div class="container">
+        <form action="hello-servlet" method="post">
+            <table>
+                <tr>
+                    <div class="login-mail">
+                        <td>
+                            <p>Nhập tên tài khoản: </p>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="text" placeholder="Tên tài khoản: " name="userName" required>
+                            </label>
+                        </td>
+                        <td>
+                            <p>Nhập vào password: </p>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="password" placeholder="Password: " name="userPassword" required>
+                            </label>
+                        </td>
+                    </div>
+                </tr>
+            </table>
+            <input type="submit" value="Đăng nhập" href="/hello-servlet">
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

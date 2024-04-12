@@ -1,0 +1,241 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+div{
+    cursor: default;
+}
+
+body{
+    font-family: arial;
+    background-color: rgb(22, 22, 22);
+}
+
+#banner {
+    background-color: #000000;
+    background-size: cover;
+    height: 700px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+}
+
+body nav {
+    background-color: rgb(34, 34, 34);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+}
+
+#logo{
+    color: rgb(255, 106, 0);
+    font-size: 40px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-family: Impact;
+    float: left;
+}
+
+body nav ul{
+    float: right;
+    margin-right: 40px;
+}
+
+body nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 10px;
+}
+
+body nav ul li a{
+    color: white;
+    font-size: 23px;
+    transition: 0.3s;
+}
+
+body nav ul li a:hover{
+    color: rgb(255, 106, 0);
+}
+
+#home a{
+    color: rgb(255, 106, 0);
+}
+
+body nav form{
+    display: inline-block;
+    margin-top: 0;
+    color: black;
+    background-color: #c6c6c6;
+    background-color: transparent;
+    line-height: 85px;
+}
+
+body nav form input{
+    box-sizing: border-box;
+    font-size: 17px;
+    height: 40px;
+    width: 500px;
+    background-color: rgb(23, 23, 23);
+    border: 2px solid white;
+    padding: 10px;
+    color: white;
+    outline: none;
+    border-radius: 8px;
+}
+
+body nav form button{
+    color: black;
+    box-sizing: border-box;
+    background-color: rgb(215, 215, 215);
+    border: none;
+    transition: 0.3s;
+    height: 40px;
+    width: 80px;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-left: 8px;
+}
+
+body nav form button:hover{
+    color: white;
+    background-color: rgb(255, 106, 0);
+}
+
+.slideshow-container {
+    max-width: 100%;
+    background-color:rgba(83, 83, 83, 0.5);
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.slide{
+    box-sizing: border-box;
+}
+
+.slide img{
+    object-fit: fill;
+    box-sizing: border-box;
+    height: 700px;
+    width: 100%;
+}
+
+.slide-caption{
+    color: #dedede;
+    font-size: 100px;
+    font-weight: bold;
+    padding: 20px 12px;
+    padding-bottom: 100px;
+    position: absolute;
+    z-index: 999;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(48, 48, 48, 0.4);
+}
+
+.product-list{
+    margin-top: 0;
+    margin-bottom: 80px;
+    padding: 0 0;
+}
+
+.product-list-caption{
+    background-color: rgb(22, 22, 22);
+    width: 100%;
+    height: 80px;
+}
+
+.product-list-caption h2{
+    display: flex;
+    background-color: rgb(175, 175, 175);
+    width: 600px;
+    height: 100%;
+    color: rgb(22, 22, 22);
+    padding: 10px;
+    padding-left: 100px;
+    font-size: 45px;
+    align-items: center;
+    clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
+}
+
+.product-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(175, 175, 175);
+    padding-top: 20px;
+}
+
+.product{
+    width: 270px;
+    height: 400px;
+    display: flex;
+    border-radius: 10px;
+    margin: 10px;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(235, 235, 235);
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.product:hover{
+    box-shadow: 0 0 0 4px rgb(255, 106, 0);
+}
+
+.product img{
+    height: 50%;
+    width: 90%;
+    margin-top: 5%;
+}
+
+.product-name{
+    font-size: 23px;
+    color: black;
+    transition: 0.2s;
+}
+
+.product-name:hover{
+    color: rgb(255, 106, 0);
+}
+
+.product-discount-label{
+    font-size: 20px;
+    color: white;
+    background-color: rgba(255, 106, 0);
+    width: 70px;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.product-original-price{
+    text-decoration: line-through;
+    color: rgb(147, 147, 147);
+}
+
+.product-price{
+    color: rgb(0, 164, 0);
+}
+
+.watch-more{
+    background-color: rgb(175, 175, 175);
+    text-align: right;
+    padding: 20px;
+    padding-right: 70px;
+    margin: 0 0;
+}
+
+.watch-more a{
+    color: rgb(255, 106, 0);
+    font-size: 25px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+}

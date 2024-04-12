@@ -1,0 +1,41 @@
+
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="header text-center">
+        <h1>Welcome </h1>
+    </div>
+
+    <a href="/user-handle?action=create&userId=-1">Add User</a>
+    <div class="table table-responsive">
+        <table>
+            <tr>
+                <th>User Id</th>
+                <th>User Name</th>
+                <th>User Password</th>
+                <th>User Email</th>
+                <th>User Role</th>
+                <th>User Phone</th>
+            </tr>
+            <tr>
+                <td><%= ur.getUserId()%></td>
+                <td><%= ur.getUserName()%></td>
+                <td><%= ur.getUserPass()%></td>
+                <td><%= ur.getUserEmail()%></td>
+                <td><%= ur.getUserRole()%></td>
+                <td><%= ur.getUserPhone()%></td>
+                <td><a href="/user-handle?action=delete&userId=<%=ur.getUserId()%>"> Delete </a></td>
+                <td><a href="/user-handle?action=update&userId=<%=ur.getUserId()%>"> Update </a></td>
+            </tr>
+            <%}%>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
