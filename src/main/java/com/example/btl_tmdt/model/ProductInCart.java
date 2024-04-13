@@ -28,7 +28,10 @@ public class ProductInCart  {
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @Column(name = "quantity")
     private int quantity;
+
+    @Column(name = "total_price")
     private double totalPrice;
 
 //    @ManyToOne

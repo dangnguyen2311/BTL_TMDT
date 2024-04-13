@@ -1,5 +1,6 @@
 package com.example.btl_tmdt.service;
 
+import com.example.btl_tmdt.dao.UserDao;
 import com.example.btl_tmdt.model.User;
 import com.example.btl_tmdt.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepo.save(user);
+//        if(userRepo.findById(user.getUserId()).isEmpty()){
+//            userRepo.save(user);
+//        }
     }
 
     public User getUserByEmail(String email) {
@@ -30,5 +34,13 @@ public class UserService {
 
     public boolean checkExistedEmail(String userEmail) {
         return userRepo.existsByUserEmail(userEmail);
+    }
+
+    public User getUserByUserName(String username) {
+        return userRepo.getUserByUserName(username);
+    }
+
+    public void editUser(String username, UserDao userDao) {
+        userRepo.updateUserByUserName(username);
     }
 }
