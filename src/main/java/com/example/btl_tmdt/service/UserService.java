@@ -20,8 +20,8 @@ public class UserService {
 //        }
     }
 
-    public User getUserByEmail(String email) {
-        return userRepo.findUserByUserEmail(email);
+    public User getUserByEmail(String userEmail) {
+        return userRepo.findUserByUserEmail(userEmail);
     }
 
     public void deleteUser(String id) {
@@ -40,7 +40,7 @@ public class UserService {
         return userRepo.getUserByUserName(username);
     }
 
-    public void editUser(String username, UserDao userDao) {
-        userRepo.updateUserByUserName(username);
-    }
+//    public void editUser(String username, UserDao userDao) {
+//        userRepo.updateUserByUserName(username);
+//    }
 }
