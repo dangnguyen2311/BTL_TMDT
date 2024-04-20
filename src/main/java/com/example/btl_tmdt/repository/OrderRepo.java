@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface OrderRepo extends JpaRepository<Order, String> {
-
+    Order findByOrderId(String order_id);
 
 
 }

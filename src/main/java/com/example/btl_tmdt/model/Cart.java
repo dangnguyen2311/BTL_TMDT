@@ -1,5 +1,6 @@
 package com.example.btl_tmdt.model;
 
+import com.example.btl_tmdt.dao.CartDao;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,9 +20,10 @@ public class Cart  {
     private String id;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
-
+    public CartDao toDao(){
+        return new CartDao(id, user.toDao());
+    }
 
 }

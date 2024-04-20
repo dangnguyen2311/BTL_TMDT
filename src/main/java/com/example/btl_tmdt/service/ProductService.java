@@ -1,6 +1,9 @@
 package com.example.btl_tmdt.service;
 
+import com.example.btl_tmdt.dao.ProductDao;
+import com.example.btl_tmdt.model.Category;
 import com.example.btl_tmdt.model.Product;
+import com.example.btl_tmdt.repository.CategoryRepo;
 import com.example.btl_tmdt.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,8 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     ProductRepo prodRepo;
+    @Autowired
+    CategoryRepo categoryRepo;
 
     public void saveProd(Product product){
         prodRepo.save(product);
@@ -22,23 +27,28 @@ public class ProductService {
 
     }
 
-//    public Optional<Product> getProductById(Integer id){
-//        return prodRepo.findById(id);
-//    }
+    public void createProduct(Product Product) {
+        Category category = categoryRepo.findById(Product.getCategory().getCategoryId()).get();
+        Product.setCategory(category);
+        prodRepo.save(Product);
+    }
 
-    public Product getProductById(Integer proId){
+
+    public Product getProductById(String proId){
         return prodRepo.getProductByProdId(proId);
     }
 
-    public boolean isExist(Product product){
-        return prodRepo.existsById(product.getProdId());
-    }
 
-    public void deleteProductById(Integer id){
-        prodRepo.deleteById(id);
-
-    }
     public void deleteProductById(Product product){
-        prodRepo.deleteById(product.getProdId());
+        prodRepo.delete(product);
+
+    }
+
+//    public void deleteProductById(Product product){
+//        prodRepo.deleteById(product.getProdId());
+//    }
+
+    public Optional<ProductDao> findProductByName(String prodName){
+        return prodRepo.findProductByProdName(prodName).map(Product::toDao);
     }
 }

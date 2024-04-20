@@ -13,18 +13,12 @@ import lombok.*;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String userId;
-    @Column(name = "user_name") // loix do cai UserEntity
     private String userName;
-    @Column(name = "user_email")
     private String userEmail;
-    @Column(name = "user_pass")
     private String userPass;
-    @Column(name = "user_role")
     private String userRole;
-    @Column(name = "user_phone")
     private String userPhone;
 
     public User(String userName, String userPass, String userEmail, String userRole, String userPhone) {

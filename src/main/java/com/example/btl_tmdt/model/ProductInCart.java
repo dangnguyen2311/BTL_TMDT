@@ -1,5 +1,6 @@
 package com.example.btl_tmdt.model;
 
+import com.example.btl_tmdt.dao.ProductInCartDao;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,23 +18,22 @@ public class ProductInCart  {
     private String id;
 
     @OneToOne
-    @JoinColumn(name = "prod_id")
+
     private Product product;
 
     @OneToOne
     @JoinColumn(name = "id")
     private Cart cart;
 
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @Column(name = "quantity")
+//    @OneToOne
+//    @JoinColumn(name = "order_id")
+//    private Order order;
     private int quantity;
-
-    @Column(name = "total_price")
     private double totalPrice;
 
-//    @ManyToOne
-//    private Cart cart;
+
+    public ProductInCartDao toDao(){
+        return new ProductInCartDao(id, product.toDao(), cart.toDao(), quantity, totalPrice);
+    }
+
 }

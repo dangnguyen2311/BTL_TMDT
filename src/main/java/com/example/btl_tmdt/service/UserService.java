@@ -40,6 +40,10 @@ public class UserService {
         return userRepo.getUserByUserName(username);
     }
 
+    public User getUserByUserId(String userId){
+        return userRepo.findById(userId).get();
+    }
+
 //    public void editUser(String username, UserDao userDao) {
 //        userRepo.updateUserByUserName(username);
 //    }
