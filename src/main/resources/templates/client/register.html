@@ -1,0 +1,135 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Shopping</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="site.webmanifest">
+<link rel="shortcut icon" type="image/x-icon"
+	href="/client/assets/img/favicon.ico">
+
+<!-- CSS here -->
+<link rel="stylesheet" href="/client/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/client/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/client/assets/css/flaticon.css">
+<link rel="stylesheet" href="/client/assets/css/slicknav.css">
+<link rel="stylesheet" href="/client/assets/css/animate.min.css">
+<link rel="stylesheet" href="/client/assets/css/magnific-popup.css">
+<link rel="stylesheet" href="/client/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/client/assets/css/themify-icons.css">
+<link rel="stylesheet" href="/client/assets/css/slick.css">
+<link rel="stylesheet" href="/client/assets/css/nice-select.css">
+<link rel="stylesheet" href="/client/assets/css/style.css">
+</head>
+
+<body>
+	<!--? Preloader Start -->
+	<div id="preloader-active">
+		<div
+			class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="preloader-circle"></div>
+				<div class="preloader-img pere-text">
+					<img src="/client/assets/img/logo/logo.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:insert="/client/fragment :: headerBox"></div>
+
+	<main>
+
+		<section class="login_part" style="margin: 20px auto;">
+			<div class="container">
+				<div class="container">
+					<div class="col-lg-6 col-md-6" style="margin: auto;">
+						<div class="login_part_form">
+							<div class="login_part_form_iner">
+								<h3>
+									Welcome Back ! <br> Please Sign up to shopping
+								</h3>
+								<p style="margin: 20px auto" th:text="${error}"></p>
+								<form class="row contact_form" th:action="@{/register}"
+									method="post" th:object="${userDTO}">
+									<div class="col-md-12 form-group p_star">
+										<input type="text" class="form-control" id="name" name="name"
+											value="" th:field="*{username}" placeholder="Username" required>
+									</div>
+									<div class="col-md-12 form-group p_star">
+										<input type="text" class="form-control" id="email"
+											name="email" value="" th:field="*{email}" placeholder="Email" required>
+									</div>
+									<div class="col-md-12 form-group p_star">
+										<input type="password" class="form-control" id="password"
+											name="password" value="" th:field="*{password}"
+											placeholder="Password" required>
+									</div>
+									<div class="col-md-12 form-group p_star">
+										<input type="password" class="form-control"
+											id="comfirm-password" name="comfirm-password" value=""
+											placeholder="Comfirm password" required>
+									</div>
+									<div class="col-md-12 form-group">
+										<button type="submit" value="submit" class="btn_3">
+											Sign up</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+		</section>
+		<div class="shop-method-area">
+			<div class="container">
+				<div class="method-wrapper"></div>
+			</div>
+		</div>
+		<!-- Shop Method End-->
+	</main>
+
+
+	<div th:insert="/client/fragment :: footerBox"></div>
+
+	<div th:insert="/client/fragment :: searchBox"></div>
+
+
+	<!-- JS here -->
+	<!-- All JS Custom Plugins Link Here here -->
+	<script src="/client/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+	<!-- Jquery, Popper, Bootstrap -->
+	<script src="/client/assets/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="/client/assets/js/popper.min.js"></script>
+	<script src="/client/assets/js/bootstrap.min.js"></script>
+	<!-- Jquery Mobile Menu -->
+	<script src="/client/assets/js/jquery.slicknav.min.js"></script>
+
+	<!-- Jquery Slick , Owl-Carousel Plugins -->
+	<script src="/client/assets/js/owl.carousel.min.js"></script>
+	<script src="/client/assets/js/slick.min.js"></script>
+
+	<!-- One Page, Animated-HeadLin -->
+	<script src="/client/assets/js/wow.min.js"></script>
+	<script src="/client/assets/js/animated.headline.js"></script>
+	<script src="/client/assets/js/jquery.magnific-popup.js"></script>
+
+	<!-- Scroll up, nice-select, sticky -->
+	<script src="/client/assets/js/jquery.scrollUp.min.js"></script>
+	<script src="/client/assets/js/jquery.nice-select.min.js"></script>
+	<script src="/client/assets/js/jquery.sticky.js"></script>
+
+	<!-- contact js -->
+	<script src="/client/assets/js/contact.js"></script>
+	<script src="/client/assets/js/jquery.form.js"></script>
+	<script src="/client/assets/js/jquery.validate.min.js"></script>
+	<script src="/client/assets/js/mail-script.js"></script>
+	<script src="/client/assets/js/jquery.ajaxchimp.min.js"></script>
+
+	<!-- Jquery Plugins, main Jquery -->
+	<script src="/client/assets/js/plugins.js"></script>
+	<script src="/client/assets/js/main.js"></script>
+
+</body>
+</html>

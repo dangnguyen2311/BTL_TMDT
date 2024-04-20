@@ -1,0 +1,187 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Shopping</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="site.webmanifest">
+<link rel="shortcut icon" type="image/x-icon"
+	href="/client/assets/img/favicon.ico">
+
+<!-- CSS here -->
+<link rel="stylesheet" href="/client/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/client/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/client/assets/css/flaticon.css">
+<link rel="stylesheet" href="/client/assets/css/slicknav.css">
+<link rel="stylesheet" href="/client/assets/css/animate.min.css">
+<link rel="stylesheet" href="/client/assets/css/magnific-popup.css">
+<link rel="stylesheet" href="/client/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/client/assets/css/themify-icons.css">
+<link rel="stylesheet" href="/client/assets/css/slick.css">
+<link rel="stylesheet" href="/client/assets/css/nice-select.css">
+<link rel="stylesheet" href="/client/assets/css/style.css">
+</head>
+
+<body>
+	<!--? Preloader Start -->
+	<div id="preloader-active">
+		<div
+			class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="preloader-circle"></div>
+				<div class="preloader-img pere-text">
+					<img src="/client/assets/img/logo/logo.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:insert="/client/fragment :: headerBox"></div>
+
+	<main>
+
+		<div class="hero-cap text-center">
+			<h2 th:if="${session.username == null}" style="margin: 40px auto;">WELCOME
+				TO OUR SHOP</h2>
+			<h2 th:if="${session.username != null}"
+				th:text="'WELCOME BACK ' +  ${session.username}"
+				style="margin: 40px auto;"></h2>
+		</div>
+
+		<section class="cart_area" style="margin: 90px auto;">
+			<div class="container">
+
+				<div class="billing_details">
+					<div class="row">
+						<form class="row contact_form" th:action="@{/order}"
+							th:object="${orderDTO}" method="post">
+							<div class="col-lg-6">
+								<h3>Billing Details</h3>
+
+								<div class="col-md-12 form-group p_star">
+									<label>Full name :</label>
+									<input placeholder="Full name" type="text" th:field="*{receiverFullname}" class="form-control" id="first" name="name" required />
+								</div>
+								<div class="col-md-12 form-group p_star">
+									<label>Phone number :</label>
+									<input placeholder="Phone number" type="text" th:field="*{receiverPhone}" class="form-control" id="number"
+										name="number" required/> 
+								</div>
+								<div class="col-md-12 form-group p_star">
+									<label>Email address :</label>
+									<input placeholder="Email Address" type="text" class="form-control" id="email"
+										name="compemailany" required/> 
+								</div>
+								<div class="col-md-12 form-group p_star">
+									<label>Address :</label>
+									<input placeholder="Address line" type="text" th:field="*{receiverAddress}" class="form-control" id="add1" name="add1" required/>
+								</div>
+								<div class="col-md-12 form-group">
+									<div class="creat_account">
+										<h3>Shipping Details</h3>
+									</div>
+									<textarea class="form-control" name="message" id="message"
+										rows="1" placeholder="Order Notes"></textarea>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="order_box">
+									<h2>Your Order</h2>
+									<ul class="list">
+										<li><a href="#">Product <span>Total</span>
+										</a></li>
+										<li th:each="cartItemDTO : ${cartItemDTOs}"><a
+											th:if="${cartItemDTO.productDTO.name.length > 25}"
+											th:inline="text" href="#">
+												[[${cartItemDTO.productDTO.name.substring(0, 25)}]] <span
+												th:inline="text" class="middle">x
+													[[${#numbers.formatInteger(cartItemDTO.quantity, 2)}]]</span> <span
+												th:inline="text" class="last">[[${#numbers.formatDecimal(cartItemDTO.quantity
+													* cartItemDTO.productDTO.price, 0, "COMMA", 0, "POINT")}]]
+													VNĐ</span>
+										</a> <a th:if="${cartItemDTO.productDTO.name.length <= 25}"
+											th:inline="text" href="#">
+												[[${cartItemDTO.productDTO.name}]] <span th:inline="text"
+												class="middle">x
+													[[${#numbers.formatInteger(cartItemDTO.quantity, 2)}]]</span> <span
+												th:inline="text" class="last">[[${#numbers.formatDecimal(cartItemDTO.quantity
+													* cartItemDTO.productDTO.price, 0, "COMMA", 0, "POINT")}]]
+													VNĐ</span>
+										</a></li>
+									</ul>
+									<ul class="list list_2">
+										<li><a href="#">Subtotal <span
+												th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></span>
+										</a></li>
+										<li><a href="#">Shipping <span>Flat rate:
+													50.000 VNĐ</span>
+										</a></li>
+										<li><a href="#">Total <span
+												th:text="${#numbers.formatDecimal(totalPrice + 50000.0, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></span>
+										</a></li>
+									</ul>
+									<button type="submit" class="btn_3">Order</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+
+		<div class="shop-method-area">
+			<div class="container">
+				<div class="method-wrapper"></div>
+			</div>
+		</div>
+		<!-- Shop Method End-->
+	</main>
+
+
+	<div th:insert="/client/fragment :: footerBox"></div>
+
+	<div th:insert="/client/fragment :: searchBox"></div>
+
+
+	<!-- JS here -->
+	<!-- All JS Custom Plugins Link Here here -->
+	<script src="/client/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+	<!-- Jquery, Popper, Bootstrap -->
+	<script src="/client/assets/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="/client/assets/js/popper.min.js"></script>
+	<script src="/client/assets/js/bootstrap.min.js"></script>
+	<!-- Jquery Mobile Menu -->
+	<script src="/client/assets/js/jquery.slicknav.min.js"></script>
+
+	<!-- Jquery Slick , Owl-Carousel Plugins -->
+	<script src="/client/assets/js/owl.carousel.min.js"></script>
+	<script src="/client/assets/js/slick.min.js"></script>
+
+	<!-- One Page, Animated-HeadLin -->
+	<script src="/client/assets/js/wow.min.js"></script>
+	<script src="/client/assets/js/animated.headline.js"></script>
+	<script src="/client/assets/js/jquery.magnific-popup.js"></script>
+
+	<!-- Scroll up, nice-select, sticky -->
+	<script src="/client/assets/js/jquery.scrollUp.min.js"></script>
+	<script src="/client/assets/js/jquery.nice-select.min.js"></script>
+	<script src="/client/assets/js/jquery.sticky.js"></script>
+
+	<!-- contact js -->
+	<script src="/client/assets/js/contact.js"></script>
+	<script src="/client/assets/js/jquery.form.js"></script>
+	<script src="/client/assets/js/jquery.validate.min.js"></script>
+	<script src="/client/assets/js/mail-script.js"></script>
+	<script src="/client/assets/js/jquery.ajaxchimp.min.js"></script>
+
+	<!-- Jquery Plugins, main Jquery -->
+	<script src="/client/assets/js/plugins.js"></script>
+	<script src="/client/assets/js/main.js"></script>
+
+</body>
+</html>

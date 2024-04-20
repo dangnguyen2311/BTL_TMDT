@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin | Dashboard</title>
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="/admin/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet"
+	href="/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- iCheck -->
+<link rel="stylesheet"
+	href="/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- JQVMap -->
+<link rel="stylesheet" href="/admin/plugins/jqvmap/jqvmap.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet"
+	href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<!-- Daterange picker -->
+<link rel="stylesheet"
+	href="/admin/plugins/daterangepicker/daterangepicker.css">
+<!-- summernote -->
+<link rel="stylesheet"
+	href="/admin/plugins/summernote/summernote-bs4.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+
+		<!-- Preloader -->
+<!--		<div-->
+<!--			class="preloader flex-column justify-content-center align-items-center">-->
+<!--			<img class="animation__shake" src="/admin/dist/img/AdminLTELogo.png"-->
+<!--				alt="AdminLTELogo" height="60" width="60">-->
+<!--		</div>-->
+
+		<div th:insert="/admin/fragment/sidebar :: navbar"></div>
+
+		<aside th:insert="/admin/fragment/sidebar :: sidebar"></aside>
+
+
+		<div class="content-wrapper">
+
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0">Add new product</h1>
+						</div>
+						<!-- /.col -->
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
+								<li class="breadcrumb-item active">Add new product</li>
+							</ol>
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+			<section class="content">
+				<div class="card card-info">
+					<div class="card-header">
+						<h3 class="card-title">Product infomation</h3>
+					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form th:action="@{/admin/product/add-product}" method="post"
+						th:object="${productDao}" enctype="multipart/form-data">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="">Product name</label> <input th:field="*{prodName}"
+									type="text" class="form-control" id="prodName"
+									placeholder="Enter product name" required>
+							</div>
+							<div class="form-group">
+								<label>Category</label> <select th:field="*{categoryDao.category_id}"
+									class="form-control">
+									<option th:each="categoryDao : ${categoryDaos}"
+										th:value="${categoryDao.category_id}" th:text="${categoryDao.category_name}"></option>
+								</select>
+							</div>
+<!--							<div class="form-group">-->
+<!--								<label >Quantity</label> <input &lt;!&ndash;th:field="*{}"&ndash;&gt;-->
+<!--									type="number" class="form-control" id=""-->
+<!--									placeholder="Enter category quantity" required>-->
+<!--							</div>-->
+							<div class="form-group">
+								<label for="">Price</label> <input th:field="*{prodPrice}"
+									type="number" class="form-control" id="prodPrice"
+									placeholder="Enter category price" required>
+							</div>
+							<div class="form-group">
+								<label for="">Description</label> <input
+									th:field="*{prodDescription}" type="text" class="form-control"
+									id="prodDescription" placeholder="Enter category description" >
+							</div>
+
+							<div class="form-group">
+								<label for="exampleInputFile">Picture</label>
+								<div class="input-group">
+									<div class="custom-file">
+										<input type="file" name="pictureFile" class="custom-file-input"
+											id="exampleInputFile" required> <label
+											class="custom-file-label" for="exampleInputFile">Choose
+											file</label>
+									</div>
+									<div class="input-group-append">
+										<span class="input-group-text">Upload</span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /.card-body -->
+
+						<div class="card-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</section>
+		</div>
+
+
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- jQuery -->
+	<script src="/admin/plugins/jquery/jquery.min.js"></script>
+	<!-- jQuery UI 1.11.4 -->
+	<script src="/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	<script>
+		$.widget.bridge('uibutton', $.ui.button)
+	</script>
+	<!-- Bootstrap 4 -->
+	<script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- ChartJS -->
+	<script src="/admin/plugins/chart.js/Chart.min.js"></script>
+	<!-- Sparkline -->
+	<script src="/admin/plugins/sparklines/sparkline.js"></script>
+	<!-- JQVMap -->
+	<script src="/admin/plugins/jqvmap/jquery.vmap.min.js"></script>
+	<script src="/admin/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+	<!-- jQuery Knob Chart -->
+	<script src="/admin/plugins/jquery-knob/jquery.knob.min.js"></script>
+	<!-- daterangepicker -->
+	<script src="/admin/plugins/moment/moment.min.js"></script>
+	<script src="/admin/plugins/daterangepicker/daterangepicker.js"></script>
+	<!-- Tempusdominus Bootstrap 4 -->
+	<script
+		src="/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<!-- Summernote -->
+	<script src="/admin/plugins/summernote/summernote-bs4.min.js"></script>
+	<!-- overlayScrollbars -->
+	<script
+		src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/admin/dist/js/adminlte.js"></script>
+	<!-- AdminLTE for demo purposes -->
+<!--	<script src="/admin/dist/js/demo.js"></script>-->
+	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+	<script src="/admin/dist/js/pages/dashboard.js"></script>
+</body>
+</html>
