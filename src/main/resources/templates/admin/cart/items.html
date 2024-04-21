@@ -88,14 +88,14 @@
 									<div class="card-body">
 										<div class="form-group">
 											<label>Select product add to cart</label> <select
-												th:field="${cartItemDTO.productDTO.id}" class="form-control">
+												th:field="${productInCartDaos.productDTO.id}" class="form-control">
 												<option th:each="productDTO : ${productDTOs}"
 													th:value="${productDTO.id}" th:text="${productDTO.name}"></option>
 											</select>
 										</div>
 										<div class="form-group">
 											<label for="">Quantity</label> <input
-												th:field="${cartItemDTO.quantity}" type="number"
+												th:field="${productInCartDaos.quantity}" type="number"
 												class="form-control" id="" placeholder="Enter quantity">
 										</div>
 
@@ -127,17 +127,17 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="cartItemDTO : ${cartItemDTOs}">
-												<td th:text="${cartItemDTO.id}"></td>
-												<td th:text="${cartItemDTO.productDTO.name}"></td>
-												<td><img th:src="${cartItemDTO.productDTO.picture}" style="width: 140px; height: 140px"/></td>
-												<td th:text="${cartItemDTO.productDTO.categoryDTO.name}"></td>
-												<td th:text="${cartItemDTO.quantity}"></td>
+											<tr th:each="productInCartDao : ${productInCartDaos}">
+												<td th:text="${productInCartDao.getId()}"></td>
+												<td th:text="${productInCartDao.getProductDao().getProdName()}"></td>
+												<td><img th:src="${productInCartDao.getProductDao().getProdImg()}" style="width: 140px; height: 140px"/></td>
+												<td th:text="${productInCartDao.getProductDao().getCategoryDao().category_name}"></td>
+												<td th:text="${productInCartDao.getQuantity()}"></td>
 												<td
-													th:text="${#numbers.formatDecimal(cartItemDTO.productDTO.price * cartItemDTO.quantity, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
+													th:text="${#numbers.formatDecimal(productInCartDao.getProductDao().getProdPrice() * productInCartDao.getQuantity(), 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
 
 												<td><a class="btn btn-danger"
-													th:href="@{/admin/carts/delete-cart-item/{id}(id=${cartItemDTO.id})}">Delete</a>
+													th:href="@{/admin/carts/delete-cart-item/{id}(id=${productInCartDao.id})}">Delete</a>
 												</td>
 											</tr>
 
@@ -149,6 +149,7 @@
 							<!-- /.card -->
 						</div>
 					</div>
+				</div>
 			</section>
 		</div>
 		

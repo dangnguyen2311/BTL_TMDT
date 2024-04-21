@@ -19,7 +19,7 @@ public class AdminUserController {
     @GetMapping("")
     public String getAllUser(Model model){
         List<UserDao> userDaoList = userService.getUsers().stream().map(User::toDao).toList();
-        model.addAttribute("users", userDaoList);
+        model.addAttribute("userDaos", userDaoList);
 
         return "admin/user/users";
     }
@@ -67,6 +67,13 @@ public class AdminUserController {
         }
 
         userService.saveUser(userDao.toModel());
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/delete-user/{id}")
+    public String deleteUserGet(@PathVariable(name = "id") String id, Model model){
+        userService.deleteUser(id);
+
         return "redirect:/admin/users";
     }
 }

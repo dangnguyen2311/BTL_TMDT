@@ -15,4 +15,8 @@ public class CartService {
     public List<Cart> getAllCart() {
         return cartRepo.findAll();
     }
+
+    public Cart getCartById(String id) {
+        return cartRepo.findById(id).get();
+    }
 }

@@ -45,9 +45,9 @@
 <!--				alt="AdminLTELogo" height="60" width="60">-->
 <!--		</div>-->
 
-		<div th:insert="/admin/fragment/sidebar :: navbar"></div>
+		<div th:insert="~{/admin/fragment/sidebar :: navbar}"></div>
 
-		<aside th:insert="/admin/fragment/sidebar :: sidebar"></aside>
+		<aside th:insert="~{/admin/fragment/sidebar :: sidebar}"></aside>
 		
 		
 		<div class="content-wrapper">
@@ -88,11 +88,11 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="cartDTO : ${cartDTOs}">
-											<td th:text="${cartDTO.id}"></td>
-											<td th:text="${cartDTO.userDTO.username}"></td>
+										<tr th:each="cartDao : ${cartDaos}">
+											<td th:text="${cartDao.id}"></td>
+											<td th:text="${cartDao.getUserDao().getUserName()}"></td>
 											<td><a
-												th:href="@{/admin/carts/cart-item/{id}(id=${cartDTO.id})}"
+												th:href="@{/admin/cart/cart-item/{id}(id=${cartDao.getId()})}"
 												class="btn btn-success">List product</a> 
 											</td>
 										</tr>
@@ -108,7 +108,7 @@
 			</section>
 		</div>
 		
-		<div th:insert="/admin/fragment/sidebar :: footer"></div>
+<!--		<div th:insert="/admin/fragment/sidebar :: footer"></div>-->
 		
 		<aside class="control-sidebar control-sidebar-dark">
 			<!-- Control sidebar content goes here -->
