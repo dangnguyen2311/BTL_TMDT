@@ -38,7 +38,7 @@ public class CheckOutController {
     @GetMapping("/checkout")
     public String getCheckout(Model model, HttpSession session) {
 
-        User user = userService.getUserByUserName((String) session.getAttribute("username"));
+        User user = userService.getUserByUserName((String) session.getAttribute("userName"));
 
         if (user == null)
             return "redirect:/login";
@@ -46,7 +46,7 @@ public class CheckOutController {
         Cart cart = cartService.getCartByUser(user);
 
         List<ProductInCartDao> productInCartDaos = productInCartService.getProductInCart(cart).stream()
-                .map(e -> e.toDao()).collect(Collectors.toList());
+                .map(ProductInCart::toDao).collect(Collectors.toList());
 
         List<CategoryDao> categoryDaos = categoryService.getCategories()
                 .stream().map(e -> e.toDao()).collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class CheckOutController {
     public String createNewOrder(Model model, HttpSession session,
                                  @ModelAttribute("orderDao") OrderDao orderDao) {
 
-        User user = userService.getUserByUserName((String) session.getAttribute("username"));
+        User user = userService.getUserByUserName((String) session.getAttribute("userName"));
         Cart cart = cartService.getCartByUser(user);
 
         List<ProductInCart> productInCarts = productInCartService.getProductInCart(cart);
@@ -111,17 +111,17 @@ public class CheckOutController {
     @GetMapping("/my-order")
     public String listOrder(Model model, HttpSession session) {
 
-        User user = userService.getUserByUserName((String) session.getAttribute("username"));
+        User user = userService.getUserByUserName((String) session.getAttribute("userName"));
 
         if (user == null)
             return "redirect:/login";
 
 
         List<CategoryDao> categoryDaos = categoryService.getCategories()
-                .stream().map(e -> e.toDao()).collect(Collectors.toList());
+                .stream().map(Category::toDao).collect(Collectors.toList());
 
         List<OrderDao> orderDaos = orderService.getListOrderOfUser(user).stream()
-                .map(e -> e.toDao()).collect(Collectors.toList());
+                .map(Order::toDao).collect(Collectors.toList());
 
         model.addAttribute("categoryDaos", categoryDaos);
         model.addAttribute("orderDaos", orderDaos);
@@ -133,7 +133,7 @@ public class CheckOutController {
     public String orderDetail(Model model, HttpSession session,
                               @PathVariable("id") String id) {
 
-        User user = userService.getUserByUserName((String) session.getAttribute("username"));
+        User user = userService.getUserByUserName((String) session.getAttribute("userName"));
 
         if (user == null)
             return "redirect:/login";
@@ -142,10 +142,10 @@ public class CheckOutController {
         Order order = orderService.getOrderById(id);
 
         List<CategoryDao> categoryDaos = categoryService.getCategories()
-                .stream().map(e -> e.toDao()).collect(Collectors.toList());
+                .stream().map(Category::toDao).collect(Collectors.toList());
 
         List<ProductInOrderDao> orderItemDaos = productInOrderService.getByOrder(order).stream()
-                .map(e -> e.toDao()).collect(Collectors.toList());
+                .map(ProductInOrder::toDao).collect(Collectors.toList());
 
         model.addAttribute("categoryDaos", categoryDaos);
         model.addAttribute("orderDao", order.toDao());

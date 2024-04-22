@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,9 +39,46 @@ public class HomeController {
     ProductService productService;
 
 
-    @GetMapping("/")
-    public String getHome(Model model){
-        model.addAttribute("userDao", new UserDao());
+    @GetMapping("")
+    public String homeRedirect () {
+        return "redirect:/login";
+    }
+
+    @GetMapping("/page/{id}")
+    public String home (Model model, HttpSession session,
+                        @PathVariable("id") Integer id) {
+
+        List<CategoryDao> categoryDaos = categoryService.getCategories()
+                .stream().map(e -> e.toDao()).collect(Collectors.toList());
+
+        List<ProductDao> listAllProductDao = productService.getProducts().stream()
+                .map(e -> e.toDao()).collect(Collectors.toList());
+
+        int pageNumber = listAllProductDao.size()/9;
+
+        List<List<ProductDao>> listPage = new ArrayList<>();
+        int index = 0;
+
+        for (int i = 0; i < pageNumber; i++) {
+            List<ProductDao> res = listAllProductDao.subList(index, index + 9);
+            listPage.add(res);
+            index += 9;
+        }
+
+        Collections.shuffle(listPage.get(id - 1));
+
+        model.addAttribute("pageNumbers", pageNumber);
+        model.addAttribute("categoryDaos", categoryDaos);
+        model.addAttribute("productDaos", listPage.get(id - 1));
+
+
+        return "/client/home";
+    }
+
+    @GetMapping("/login")
+    public String getHomeGet(Model model){
+        UserDao userDao = new UserDao();
+        model.addAttribute("userDao", userDao);
         return "client/login";
     }
 
@@ -49,13 +88,13 @@ public class HomeController {
 //        UserDao userDao2 =
         if(userDao1 == null){
             model.addAttribute("error", "Login failed");
-
+            System.out.println("Login failed");
         }
         else if(userDao.getUserPass().equals(userDao1.getUserPass())){
             System.out.println("Login successfully");
             session.setAttribute("userName", userDao1.getUserName());
             model.addAttribute("userDao", userDao1);
-            return "redirect:/home";
+            return "redirect:/page/1";
         }
         return "client/login";
     }

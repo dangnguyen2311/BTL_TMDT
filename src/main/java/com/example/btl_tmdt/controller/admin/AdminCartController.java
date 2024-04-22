@@ -82,7 +82,7 @@ public class AdminCartController {
         cartItemDao.setCartDao(cartService.getCartById(id).toDao());
         cartItemDao.setProductDao(productService
                 .getProductById(cartItemDao.getProductDao().getProdId()).toDao());
-        productInCartService.createCartItem(cartItemDao.toModel());
+        productInCartService.createProductInCart(cartItemDao.toModel());
 
         return "redirect:/admin/carts/cart-item/{id}";
     }

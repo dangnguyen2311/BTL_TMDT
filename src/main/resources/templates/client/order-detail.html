@@ -30,17 +30,17 @@
 
 <body>
 	<!--? Preloader Start -->
-	<div id="preloader-active">
-		<div
-			class="preloader d-flex align-items-center justify-content-center">
-			<div class="preloader-inner position-relative">
-				<div class="preloader-circle"></div>
-				<div class="preloader-img pere-text">
-					<img src="/client/assets/img/logo/logo.png" alt="">
-				</div>
-			</div>
-		</div>
-	</div>
+<!--	<div id="preloader-active">-->
+<!--		<div-->
+<!--			class="preloader d-flex align-items-center justify-content-center">-->
+<!--			<div class="preloader-inner position-relative">-->
+<!--				<div class="preloader-circle"></div>-->
+<!--				<div class="preloader-img pere-text">-->
+<!--					<img src="/client/assets/img/logo/logo.png" alt="">-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
 
 	<div th:insert="/client/fragment :: headerBox"></div>
 
@@ -64,28 +64,28 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="orderItemDTO : ${orderItemDTOs}">
+								<tr th:each="productInOrderDao : ${productInOrderDaos}">
 									<td>
 										<div class="media">
 											<div class="d-flex">
-												<img th:src="${orderItemDTO.productDTO.picture}" alt="" />
+												<img th:src="${productInOrderDao.getProduct().getProdImg()}" alt="" />
 											</div>
 											<div class="media-body">
-												<p th:text="${orderItemDTO.productDTO.name}"></p>
+												<p th:text="${productInOrderDao.getProduct().getProdName()}"></p>
 											</div>
 										</div>
 									</td>
 									<td>
 										<h5
-											th:text="${#numbers.formatDecimal(orderItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+											th:text="${#numbers.formatDecimal(productInOrderDao.getProduct().getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
 									</td>
 									<td>
 										<h5
-											th:text="${orderItemDTO.quantity}"></h5>
+											th:text="${productInOrderDao.getQuantity()}"></h5>
 									</td>
 									<td>
 										<h5
-											th:text="${#numbers.formatDecimal(orderItemDTO.quantity * orderItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+											th:text="${#numbers.formatDecimal(productInOrderDao.getQuantity() * productInOrderDao.getProduct().getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
 									</td>
 								</tr>
 
@@ -97,7 +97,7 @@
 										<h5>Subtotal</h5>
 									</td>
 									<td>
-										<h5 th:text="${#numbers.formatDecimal(orderDTO.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+										<h5 th:text="${#numbers.formatDecimal(orderDao.getTotal(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
 									</td>
 								</tr>
 
@@ -105,6 +105,7 @@
 						</table>
 					</div>
 				</div>
+			</div>
 		</section>
 
 
@@ -117,9 +118,9 @@
 	</main>
 
 
-	<div th:insert="/client/fragment :: footerBox"></div>
+	<div th:insert="~{/client/fragment :: footerBox}"></div>
 
-	<div th:insert="/client/fragment :: searchBox"></div>
+	<div th:insert="~{/client/fragment :: searchBox}"></div>
 
 	<!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->

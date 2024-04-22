@@ -43,10 +43,10 @@
 	<main>
 
 		<div class="hero-cap text-center">
-			<h2 th:if="${session.username == null}" style="margin: 40px auto;">WELCOME
+			<h2 th:if="${session.userName == null}" style="margin: 40px auto;">WELCOME
 				TO OUR SHOP</h2>
-			<h2 th:if="${session.username != null}"
-				th:text="'WELCOME BACK ' +  ${session.username}"
+			<h2 th:if="${session.userName != null}"
+				th:text="'WELCOME BACK ' +  ${session.userName}"
 				style="margin: 40px auto;"></h2>
 		</div>
 
@@ -57,18 +57,18 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="product_img_slide owl-carousel">
 							<div class="single_product_img">
-								<img th:src="${productDTO.picture}" alt="#" class="img-fluid">
+								<img th:src="${productDao.getProdImg()}" alt="#" class="img-fluid">
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6">
 						<div class="single_product_text text-center">
-							<h3 th:text="${productDTO.name}"></h3>
-							<p th:text="${productDTO.description}"></p>
+							<h3 th:text="${productDao.getProdName()}"></h3>
+							<p th:text="${productDao.getProdDescription()}"></p>
 							<div class="card_area">
 								<form th:action="@{/add-to-cart}"
 									method="get">
-									<input style="display: none" th:value="${productDTO.id}" th:name="id">
+									<input style="display: none" th:value="${productDao.getProdId()}" th:name="id">
 									<div class="product_count_area">
 										<p>Quantity</p>
 										<div class="product_count d-inline-block">
@@ -80,14 +80,14 @@
 												class="ti-plus"></i></span>
 										</div>
 										<p
-											th:text="${#numbers.formatDecimal(productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></p>
+											th:text="${#numbers.formatDecimal(productDao.getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></p>
 									</div>
-									<div th:if="${session.username != null}" class="add_to_cart">
+									<div th:if="${session.userName != null}" class="add_to_cart">
 										<button type="submit"
 											class="btn_3">add to cart</button>
 									</div>
 								</form>
-								<div th:if="${session.username == null}" class="add_to_cart">
+								<div th:if="${session.userName == null}" class="add_to_cart">
 									<a th:href="@{/login}" class="btn_3">add to cart</a>
 								</div>
 							</div>

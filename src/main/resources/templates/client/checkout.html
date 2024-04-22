@@ -26,26 +26,26 @@
 
 <body>
 	<!--? Preloader Start -->
-	<div id="preloader-active">
-		<div
-			class="preloader d-flex align-items-center justify-content-center">
-			<div class="preloader-inner position-relative">
-				<div class="preloader-circle"></div>
-				<div class="preloader-img pere-text">
-					<img src="/client/assets/img/logo/logo.png" alt="">
-				</div>
-			</div>
-		</div>
-	</div>
+<!--	<div id="preloader-active">-->
+<!--		<div-->
+<!--			class="preloader d-flex align-items-center justify-content-center">-->
+<!--			<div class="preloader-inner position-relative">-->
+<!--				<div class="preloader-circle"></div>-->
+<!--				<div class="preloader-img pere-text">-->
+<!--					<img src="/client/assets/img/logo/logo.png" alt="">-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
 
-	<div th:insert="/client/fragment :: headerBox"></div>
+	<div th:insert="~{/client/fragment :: headerBox}"></div>
 
 	<main>
 
 		<div class="hero-cap text-center">
-			<h2 th:if="${session.username == null}" style="margin: 40px auto;">WELCOME
+			<h2 th:if="${session.userName == null}" style="margin: 40px auto;">WELCOME
 				TO OUR SHOP</h2>
-			<h2 th:if="${session.username != null}"
+			<h2 th:if="${session.userName != null}"
 				th:text="'WELCOME BACK ' +  ${session.username}"
 				style="margin: 40px auto;"></h2>
 		</div>
@@ -56,17 +56,17 @@
 				<div class="billing_details">
 					<div class="row">
 						<form class="row contact_form" th:action="@{/order}"
-							th:object="${orderDTO}" method="post">
+							th:object="${orderDao}" method="post">
 							<div class="col-lg-6">
 								<h3>Billing Details</h3>
 
 								<div class="col-md-12 form-group p_star">
 									<label>Full name :</label>
-									<input placeholder="Full name" type="text" th:field="*{receiverFullname}" class="form-control" id="first" name="name" required />
+									<input placeholder="Full name" type="text" th:field="*{fullName}" class="form-control" id="first" name="name" required />
 								</div>
 								<div class="col-md-12 form-group p_star">
 									<label>Phone number :</label>
-									<input placeholder="Phone number" type="text" th:field="*{receiverPhone}" class="form-control" id="number"
+									<input placeholder="Phone number" type="text" th:field="*{phone}" class="form-control" id="number"
 										name="number" required/> 
 								</div>
 								<div class="col-md-12 form-group p_star">
@@ -76,7 +76,7 @@
 								</div>
 								<div class="col-md-12 form-group p_star">
 									<label>Address :</label>
-									<input placeholder="Address line" type="text" th:field="*{receiverAddress}" class="form-control" id="add1" name="add1" required/>
+									<input placeholder="Address line" type="text" th:field="*{address}" class="form-control" id="add1" name="add1" required/>
 								</div>
 								<div class="col-md-12 form-group">
 									<div class="creat_account">
@@ -92,22 +92,22 @@
 									<ul class="list">
 										<li><a href="#">Product <span>Total</span>
 										</a></li>
-										<li th:each="cartItemDTO : ${cartItemDTOs}"><a
-											th:if="${cartItemDTO.productDTO.name.length > 25}"
+										<li th:each="productInCartDao : ${productInCartDaos}"><a
+											th:if="${productInCartDao.getProduct().getProdName().length > 25}"
 											th:inline="text" href="#">
-												[[${cartItemDTO.productDTO.name.substring(0, 25)}]] <span
+												[[${cartItemDaos.productDaos.name.substring(0, 25)}]] <span
 												th:inline="text" class="middle">x
-													[[${#numbers.formatInteger(cartItemDTO.quantity, 2)}]]</span> <span
-												th:inline="text" class="last">[[${#numbers.formatDecimal(cartItemDTO.quantity
-													* cartItemDTO.productDTO.price, 0, "COMMA", 0, "POINT")}]]
+													[[${#numbers.formatInteger(cartItemDaos.quantity, 2)}]]</span> <span
+												th:inline="text" class="last">[[${#numbers.formatDecimal(cartItemDaos.quantity
+													* cartItemDaos.productDaos.price, 0, "COMMA", 0, "POINT")}]]
 													VNĐ</span>
-										</a> <a th:if="${cartItemDTO.productDTO.name.length <= 25}"
+										</a> <a th:if="${productInCartDao.getProduct().getProdName().length <= 25}"
 											th:inline="text" href="#">
-												[[${cartItemDTO.productDTO.name}]] <span th:inline="text"
+												[[${cartItemDaos.productDaos.name}]] <span th:inline="text"
 												class="middle">x
-													[[${#numbers.formatInteger(cartItemDTO.quantity, 2)}]]</span> <span
-												th:inline="text" class="last">[[${#numbers.formatDecimal(cartItemDTO.quantity
-													* cartItemDTO.productDTO.price, 0, "COMMA", 0, "POINT")}]]
+													[[${#numbers.formatInteger(cartItemDaos.quantity, 2)}]]</span> <span
+												th:inline="text" class="last">[[${#numbers.formatDecimal(productInCartDao.getQuantity()
+													* cartItemDaos.productDaos.price, 0, "COMMA", 0, "POINT")}]]
 													VNĐ</span>
 										</a></li>
 									</ul>
@@ -143,9 +143,9 @@
 	</main>
 
 
-	<div th:insert="/client/fragment :: footerBox"></div>
+	<div th:insert="~{/client/fragment :: footerBox}"></div>
 
-	<div th:insert="/client/fragment :: searchBox"></div>
+	<div th:insert="~{/client/fragment :: searchBox}"></div>
 
 
 	<!-- JS here -->

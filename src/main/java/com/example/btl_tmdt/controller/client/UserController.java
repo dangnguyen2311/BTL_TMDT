@@ -98,23 +98,23 @@ public class UserController {
 
 
 
-    @PostMapping("/register")
+//    @PostMapping("/register")
+////    public @ResponseBody User register(@PathParam("user_name") String user_name, @PathParam("user_phone") String user_phone, @PathParam("user_email") String user_email, @PathParam("user_pass") String user_pass) {
 //    public @ResponseBody User register(@PathParam("user_name") String user_name, @PathParam("user_phone") String user_phone, @PathParam("user_email") String user_email, @PathParam("user_pass") String user_pass) {
-    public @ResponseBody User register(@PathParam("user_name") String user_name, @PathParam("user_phone") String user_phone, @PathParam("user_email") String user_email, @PathParam("user_pass") String user_pass) {
-            User user = new User();
-        user.setUserName(user_name);
-        user.setUserEmail(user_email);
-        user.setUserPass(user_pass);
-        user.setUserPhone(user_phone);
-        user.setUserRole("1");
-
-        if (userService.checkExistedEmail(user_email)) {
-            return null;
-        }
-        userService.saveUser(user);
-//        session.setAttribute();
-        return user;
-    }
+//            User user = new User();
+//        user.setUserName(user_name);
+//        user.setUserEmail(user_email);
+//        user.setUserPass(user_pass);
+//        user.setUserPhone(user_phone);
+//        user.setUserRole("1");
+//
+//        if (userService.checkExistedEmail(user_email)) {
+//            return null;
+//        }
+//        userService.saveUser(user);
+////        session.setAttribute();
+//        return user;
+//    }
 
     @GetMapping("/getUsers")
     public @ResponseBody List<User> getUsers() {

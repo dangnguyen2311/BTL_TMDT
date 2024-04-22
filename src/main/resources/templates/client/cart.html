@@ -43,7 +43,7 @@
 		</div>
 	</div>
 
-	<div th:insert="/client/fragment :: headerBox"></div>
+	<div th:insert="~{/client/fragment :: headerBox}"></div>
 
 	<main>
 
@@ -65,34 +65,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="cartItemDTO : ${cartItemDTOs}">
+								<tr th:each="productInCartDao : ${productInCartDaos}">
 									<td>
 										<div class="media">
 											<div class="d-flex">
-												<img th:src="${cartItemDTO.productDTO.picture}" alt="" />
+												<img th:src="${productInCartDao.getProductDao().getProdImg()}" alt="" />
 											</div>
 											<div class="media-body">
-												<p th:text="${cartItemDTO.productDTO.name}"></p>
+												<p th:text="${productInCartDao.getProductDao().getProdName()}"></p>
 											</div>
 										</div>
 									</td>
 									<td>
 										<h5
-											th:text="${#numbers.formatDecimal(cartItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+											th:text="${#numbers.formatDecimal(productInCartDao.getProductDao().getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
 									</td>
 									<td>
 										<form
-											th:action="@{/update-cart/{id}(id=${cartItemDTO.id})}"
+											th:action="@{/update-cart/{id}(id=${productInCartDao.getId()})}"
 											method="post">
 
-											<input name="quantity" type="number" th:value="${cartItemDTO.quantity}"
+											<input name="quantity" type="number" th:value="${productInCartDao.getQuantity()}"
 												min="0" max="100">
 											<button class="genric-btn success circle">Cập nhật</button>
 										</form>
 									</td>
 									<td>
 										<h5
-											th:text="${#numbers.formatDecimal(cartItemDTO.quantity * cartItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+											th:text="${#numbers.formatDecimal(productInCartDao.getQuantity() * productInCartDao.getProductDao().getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
 									</td>
 								</tr>
 
@@ -104,7 +104,7 @@
 										<h5>Subtotal</h5>
 									</td>
 									<td>
-										<h5 th:text="${#numbers.formatDecimal(totalPriceOfCart, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+										<h5 th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
 									</td>
 								</tr>
 
@@ -117,6 +117,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 		</section>
 
 
@@ -129,9 +130,9 @@
 	</main>
 
 
-	<div th:insert="/client/fragment :: footerBox"></div>
+	<div th:insert="~{/client/fragment :: footerBox}"></div>
 
-	<div th:insert="/client/fragment :: searchBox"></div>
+	<div th:insert="~{/client/fragment :: searchBox}"></div>
 
 	<!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->

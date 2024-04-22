@@ -31,6 +31,13 @@ public class ProductInCart  {
     private int quantity;
     private double totalPrice;
 
+    public ProductInCart(Cart cart, Product product, int i) {
+        this.cart = cart;
+        this.product = product;
+        this.quantity = i;
+        this.totalPrice = this.quantity * Double.parseDouble(this.product.getProdPrice());
+    }
+
 
     public ProductInCartDao toDao(){
         return new ProductInCartDao(id, product.toDao(), cart.toDao(), quantity, totalPrice);
