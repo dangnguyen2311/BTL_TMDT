@@ -44,6 +44,10 @@ public class UserService {
         return userRepo.findById(userId).get();
     }
 
+    public void createUser(User user) {
+        userRepo.save(user);
+    }
+
 //    public void editUser(String username, UserDao userDao) {
 //        userRepo.updateUserByUserName(username);
 //    }

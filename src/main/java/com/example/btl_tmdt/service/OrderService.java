@@ -6,9 +6,11 @@ import com.example.btl_tmdt.dao.ProductDao;
 import com.example.btl_tmdt.repository.OrderRepo;
 import com.example.btl_tmdt.repository.ProductInOrderRepo;
 import com.example.btl_tmdt.repository.ProductRepo;
+import com.example.btl_tmdt.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +23,8 @@ public class OrderService {
 
     @Autowired
     ProductInOrderRepo productInOrderRepo;
+    @Autowired
+    UserRepo userRepo;
 
     public List<OrderDao> getOrders(){
 
@@ -29,6 +33,16 @@ public class OrderService {
 
     public Order getOrderById(String id) {
         return orderRepo.findByOrderId(id);
+    }
+
+    public Order createOrder(Order order) {
+        User user = userRepo.findUserByUserName(order.getUser().getUserName());
+        order.setUser(user);
+        return orderRepo.save(order);
+    }
+
+    public List<Order> getListOrderOfUser(User user) {
+        return orderRepo.findByUser(user);
     }
 
 //    public List<ProductDao> getProductsInOder(String order_id){

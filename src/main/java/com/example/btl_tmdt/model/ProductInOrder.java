@@ -28,6 +28,13 @@ public class ProductInOrder {
     private Integer quantity;
     private Double totalPrice;
 
+    public ProductInOrder(Order order, Product product, int quantity) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.totalPrice = this.quantity * Double.parseDouble(this.product.getProdPrice());
+    }
+
     public ProductInOrderDao toDao(){
         return new ProductInOrderDao(id, order.toDao(), product.toDao(), quantity, totalPrice);
     }

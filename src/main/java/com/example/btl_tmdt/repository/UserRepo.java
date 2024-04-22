@@ -14,4 +14,6 @@ public interface UserRepo extends JpaRepository<User, String> {
 //    void updateUserByUserName(String username);
 
     User getUserByUserEmail(String userEmail);
+
+    User findUserByUserName(String  username);
 }

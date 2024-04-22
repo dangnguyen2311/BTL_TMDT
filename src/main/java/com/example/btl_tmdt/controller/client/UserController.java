@@ -1,9 +1,15 @@
 package com.example.btl_tmdt.controller.client;
 
+import com.example.btl_tmdt.dao.CategoryDao;
+import com.example.btl_tmdt.dao.ProductDao;
+import com.example.btl_tmdt.dao.UserDao;
+import com.example.btl_tmdt.model.Category;
+import com.example.btl_tmdt.model.Product;
 import com.example.btl_tmdt.model.User;
 import com.example.btl_tmdt.repository.ProductRepo;
 import com.example.btl_tmdt.repository.UserRepo;
 import com.example.btl_tmdt.request.UserRequest;
+import com.example.btl_tmdt.service.CategoryService;
 import com.example.btl_tmdt.service.ProductService;
 import com.example.btl_tmdt.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -27,63 +34,67 @@ public class UserController {
     @Autowired
     HttpSession session;
 
+    @Autowired
+    CategoryService categoryService;
+
     @GetMapping("/to-register")
     public String toregister(){
         return "register";
     }
 
     @GetMapping("/home")
-    public ModelAndView home(){
-        ModelAndView mv = new ModelAndView();
-        UserRequest user = (UserRequest) session.getAttribute("user");
+    public String home(Model model){
+        String userName = (String) session.getAttribute("userName");
 
-        if(user == null){
-            mv.setViewName("redirect:/login");
+        if(userName == null){
+            System.out.println("userDao is null");
+            return "redirect:/login";
         }
         else{
-
-            mv.setViewName("home");
-            mv.addObject("products", productService.getProducts());
+            List<ProductDao> productDaos = productService.getProducts().stream().map(Product::toDao).collect(Collectors.toList());
+            model.addAttribute("productDaos", productDaos);
+            List<CategoryDao> categoryDaos = categoryService.getCategories().stream().map(Category::toDao).collect(Collectors.toList());
+            model.addAttribute("categoryDaos", categoryDaos);
 //            session.setAttribute("products", productService.getProducts());
 
         }
-        return mv;
+        return "client/home";
     }
 
 
-    @PostMapping("/login")
-    public ModelAndView login(@PathParam("email") String email, @PathParam("password") String password) {
-        ModelAndView mv = new ModelAndView();
-
-        User user = userService.getUserByEmail(email);
-//        List<User> userList = userService.getUsers();
-//        for(User u: userList) System.out.println(u);
-        System.out.println(user);
-        if(user == null){
-            System.out.println("Can't find user in database");
-            mv.setViewName("login");
-            return mv;
-        }
-        else if (user.getUserPass().equals(password)) {
-//            mv.addObject("user", user);
-//            mv.addObject("products", productService.getProducts());
-            UserRequest userRequest = new UserRequest();
-            userRequest.setUserName(user.getUserName());
-            userRequest.setUserEmail(user.getUserEmail());
-            userRequest.setUserPass(user.getUserPass());
-            userRequest.setUserPhone(user.getUserPhone());
-            userRequest.setUserRole(user.getUserRole());
-            session.setAttribute("user", userRequest);
-//            session.setAttribute("products", productService.getProducts());
-
-            System.out.println("Login successfully !!!");
-            mv.setViewName("redirect:/home");
-            return mv;
-        }
-        mv.setViewName("redirect:/index");
-        return mv;
-//        return "redirect:/login";
-    }
+//    @PostMapping("/login")
+//    public ModelAndView login(@PathParam("email") String email, @PathParam("password") String password) {
+//        ModelAndView mv = new ModelAndView();
+//
+//        User user = userService.getUserByEmail(email);
+////        List<User> userList = userService.getUsers();
+////        for(User u: userList) System.out.println(u);
+//        System.out.println(user);
+//        if(user == null){
+//            System.out.println("Can't find user in database");
+//            mv.setViewName("login");
+//            return mv;
+//        }
+//        else if (user.getUserPass().equals(password)) {
+////            mv.addObject("user", user);
+////            mv.addObject("products", productService.getProducts());
+//            UserRequest userRequest = new UserRequest();
+//            userRequest.setUserName(user.getUserName());
+//            userRequest.setUserEmail(user.getUserEmail());
+//            userRequest.setUserPass(user.getUserPass());
+//            userRequest.setUserPhone(user.getUserPhone());
+//            userRequest.setUserRole(user.getUserRole());
+//            session.setAttribute("user", userRequest);
+////            session.setAttribute("products", productService.getProducts());
+//
+//            System.out.println("Login successfully !!!");
+//            mv.setViewName("redirect:/home");
+//            return mv;
+//        }
+//        mv.setViewName("redirect:/index");
+//        return mv;
+////        return "redirect:/login";
+//    }
 
 
 

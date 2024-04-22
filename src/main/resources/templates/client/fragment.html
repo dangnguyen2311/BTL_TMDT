@@ -28,27 +28,27 @@
 									<li><a th:href="@{/}">Home</a></li>
 									<li><a href="#">Category</a>
 										<ul class="submenu">
-											<li th:each="categoryDTO : ${categoryDTOs}"><a
-												th:href="@{/category/{name}(name=${categoryDTO.name})}"
-												th:text="${categoryDTO.name}"></a></li>
+											<li th:each="categoryDao : ${categoryDaos}"><a
+												th:href="@{/category/{name}(name=${categoryDao.getCategory_name()})}"
+												th:text="${categoryDao.getCategory_name()}"></a></li>
 										</ul></li>
-									<!--  <li th:if="${session.username != null}"><a
+									<!--  <li th:if="${session.userName != null}"><a
 										th:href="@{/profile}">Profile</a></li>
-									<li th:if="${session.username == null}"><a
+									<li th:if="${session.userName == null}"><a
 										th:href="@{/login}">Profile</a></li>
 										-->
-									<li th:if="${session.username != null}"><a
+									<li th:if="${session.userName != null}"><a
 										th:href="@{/my-cart}">My cart</a></li>
-									<li th:if="${session.username == null}"><a
+									<li th:if="${session.userName == null}"><a
 										th:href="@{/login}">My cart</a></li>
-									<li th:if="${session.username != null}"><a
+									<li th:if="${session.userName != null}"><a
 										th:href="@{/my-order}">My order</a></li>
-									<li th:if="${session.username == null}"><a
+									<li th:if="${session.userName == null}"><a
 										th:href="@{/login}">My order</a></li>
-									<li><a href="https://fb.com/hoangxq2k1">Contact</a></li>
-									<li th:if="${session.username != null}"><a
+									<li><a href="#">Contact</a></li>
+									<li th:if="${session.userName != null}"><a
 										th:href="@{/logout}">Logout</a></li>
-									<li th:if="${session.username == null}"><a
+									<li th:if="${session.userName == null}"><a
 										th:href="@{/login}">Login</a></li>
 								</ul>
 							</nav>
@@ -61,13 +61,13 @@
 										<span class="flaticon-search"></span>
 									</div>
 								</li>
-								<li th:if="${session.username == null}"><a
+								<li th:if="${session.userName == null}"><a
 									th:href="@{/login}"><span class="flaticon-user"></span></a></li>
-								<li th:if="${session.username != null}"><a
+								<li th:if="${session.userName != null}"><a
 									th:href="@{/profile}"><span class="flaticon-user"></span></a></li>
-								<li th:if="${session.username == null}"><a
+								<li th:if="${session.userName == null}"><a
 									th:href="@{/login}"><span class="flaticon-shopping-cart"></span></a></li>
-								<li th:if="${session.username != null}"><a
+								<li th:if="${session.userName != null}"><a
 									th:href="@{/my-cart}"><span class="flaticon-shopping-cart"></span></a></li>
 							</ul>
 						</div>

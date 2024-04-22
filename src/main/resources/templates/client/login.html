@@ -70,15 +70,15 @@
 									</h3>
 									<p style="margin: 20px auto" th:text="${error}"></p>
 									<form class="row contact_form" th:action="@{/login}"
-										method="post" th:object="${userDTO}" novalidate="novalidate">
+										method="post" th:object="${userDao}" novalidate="novalidate">
 										<div class="col-md-12 form-group p_star">
 											<input type="email" class="form-control" id="email"
-												name="email" value="" th:field="*{email}"
+												name="email" value="" th:field="*{userEmail}"
 												placeholder="Email">
 										</div>
 										<div class="col-md-12 form-group p_star">
 											<input type="password" class="form-control" id="password"
-												name="password" value="" th:field="*{password}"
+												name="password" value="" th:field="*{userPass}"
 												placeholder="Password">
 										</div>
 										<div class="col-md-12 form-group">
@@ -107,9 +107,9 @@
 	</main>
 
 
-	<div th:insert="/client/fragment :: footerBox"></div>
+	<div th:insert="~{/client/fragment :: footerBox}"></div>
 
-	<div th:insert="/client/fragment :: searchBox"></div>
+	<div th:insert="~{/client/fragment :: searchBox}"></div>
 
 	<!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->

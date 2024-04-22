@@ -18,7 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 //@Getter
 //@Setter
-public class Product  implements Serializable{
+public class Product  {
 //    @Serial
 //    private static final long serialVersionUID = 1L;
     @Id

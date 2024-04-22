@@ -1,6 +1,5 @@
 package com.example.btl_tmdt.service;
 
-import com.example.btl_tmdt.dao.ProductInOrderDao;
 import com.example.btl_tmdt.model.Order;
 import com.example.btl_tmdt.model.ProductInOrder;
 import com.example.btl_tmdt.repository.OrderRepo;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductInOrderService {
@@ -29,5 +27,16 @@ public class ProductInOrderService {
     public void deleteOrder(Order order) {
         productInOrderRepo.getProductInOrdersByOrder(order);//??????
         orderRepo.delete(order);
+    }
+
+    public void createProductInOrder(ProductInOrder productInOrder) {
+        Order order = orderRepo.findById(productInOrder.getOrder().getOrderId()).get();
+        productInOrder.setOrder(order);
+        productInOrderRepo.save(productInOrder);
+    }
+
+    public List<ProductInOrder> getByOrder(Order order) {
+        return productInOrderRepo.findAllByOrder(order);
+
     }
 }
