@@ -30,7 +30,8 @@
 										<ul class="submenu">
 											<li th:each="categoryDao : ${categoryDaos}"><a
 												th:href="@{/category/{name}(name=${categoryDao.getCategory_name()})}"
-												th:text="${categoryDao.getCategory_name()}"></a></li>
+												th:text="${categoryDao.getCategory_name()}"></a>
+											</li>
 										</ul></li>
 									<!--  <li th:if="${session.userName != null}"><a
 										th:href="@{/profile}">Profile</a></li>

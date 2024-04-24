@@ -3,10 +3,7 @@ package com.example.btl_tmdt.controller.client;
 import com.example.btl_tmdt.dao.CategoryDao;
 import com.example.btl_tmdt.dao.ProductDao;
 import com.example.btl_tmdt.dao.ProductInCartDao;
-import com.example.btl_tmdt.model.Cart;
-import com.example.btl_tmdt.model.Product;
-import com.example.btl_tmdt.model.ProductInCart;
-import com.example.btl_tmdt.model.User;
+import com.example.btl_tmdt.model.*;
 import com.example.btl_tmdt.service.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
@@ -44,20 +41,22 @@ public class CartController {
     public String getCartDetail (Model model, HttpSession session) {
 
         User user = userService.getUserByUserName((String) session.getAttribute("userName"));
-
         if (user == null)
             return "redirect:/login";
+        System.out.println("UserName add-to-cart: "+ user.getUserName() + " user ID: " + user.getUserId());
 
         Cart cart = cartService.getCartByUser(user);
-
+        System.out.println("cart ID: " + cart.getId());
         List<ProductInCartDao> productInCartDaos = productInCartService.getProductInCart(cart).stream()
                 .map(ProductInCart::toDao).collect(Collectors.toList());
-
+        for(ProductInCartDao i: productInCartDaos){
+            System.out.println("name product: " + i.getProductDao().getProdName());
+        }
         List<CategoryDao> categoryDaos = categoryService.getCategories()
-                .stream().map(e -> e.toDao()).collect(Collectors.toList());
+                .stream().map(Category::toDao).collect(Collectors.toList());
 
         List<ProductDao> productDaos = productService.getProducts().stream()
-                .map(e -> e.toDao()).collect(Collectors.toList());
+                .map(Product::toDao).collect(Collectors.toList());
 
         Collections.shuffle(productDaos);
 
@@ -67,7 +66,6 @@ public class CartController {
 
         model.addAttribute("categoryDaos", categoryDaos);
         model.addAttribute("productDaos", productDaos);
-
         model.addAttribute("cartDao", cart.toDao());
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("productInCartDaos", productInCartDaos);
@@ -81,9 +79,10 @@ public class CartController {
                              @RequestParam("quantity") int quantity) {
 
         User user = userService.getUserByUserName((String) session.getAttribute("userName"));
-
         if (user == null)
             return "redirect:/login";
+
+        System.out.println("UserName add-to-cart: "+ user.getUserName());
 
         Cart cart = cartService.getCartByUser(user);
         Product product = productService.getProductById(id);
@@ -93,7 +92,7 @@ public class CartController {
 
         productInCartService.createProductInCart(productInCart);
 //        productInCartService.createNewCart();
-
+//        List<ProductInCartDao> productInCartDaos = productInCartService.getProductInCartByUser(user);
 
         return "redirect:/my-cart";
     }

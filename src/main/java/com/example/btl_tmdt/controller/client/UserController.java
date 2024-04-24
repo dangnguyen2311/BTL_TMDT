@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,29 @@ public class UserController {
 
         }
         return "client/home";
+    }
+
+    @GetMapping("/category/{id}")
+    public String getProductOfCategory (Model model, HttpSession session,
+                                        @PathVariable(name = "id") String name){
+
+        CategoryDao categoryDao = categoryService.getCategoriesByname(name).toDao();
+
+        List<ProductDao> productDaoS = productService.getProducts().stream()
+                .filter(e -> e.getCategory().getCategoryName().equals(name)).collect(Collectors.toList())
+                .stream().map(e -> e.toDao()).collect(Collectors.toList());
+
+        List<CategoryDao> categoryDaos = categoryService.getCategories()
+                .stream().map(e -> e.toDao()).collect(Collectors.toList());
+
+        Collections.shuffle(productDaoS);
+
+        model.addAttribute("categoryDaos", categoryDaos);
+        model.addAttribute("categoryDao", categoryDao);
+        model.addAttribute("productDaos", productDaoS);
+
+        return "/client/home";
+
     }
 
 

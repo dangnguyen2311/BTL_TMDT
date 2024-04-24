@@ -18,11 +18,9 @@ public class ProductInCart  {
     private String id;
 
     @OneToOne
-
     private Product product;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
     private Cart cart;
 
 //    @OneToOne

@@ -19,7 +19,8 @@ public class ProductInOrder {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @OneToOne

@@ -1,9 +1,11 @@
 package com.example.btl_tmdt.service;
 
 
+import com.example.btl_tmdt.dao.ProductInCartDao;
 import com.example.btl_tmdt.model.Cart;
 import com.example.btl_tmdt.model.Product;
 import com.example.btl_tmdt.model.ProductInCart;
+import com.example.btl_tmdt.model.User;
 import com.example.btl_tmdt.repository.CartRepo;
 import com.example.btl_tmdt.repository.ProductInCartRepo;
 import com.example.btl_tmdt.repository.ProductInOrderRepo;
@@ -54,4 +56,7 @@ public class ProductInCartService {
     }
 
 
+//    public List<ProductInCartDao> getProductInCartByUser(User user) {
+//        productInCartRepo.
+//    }
 }
