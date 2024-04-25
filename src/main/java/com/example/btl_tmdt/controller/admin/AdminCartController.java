@@ -84,7 +84,7 @@ public class AdminCartController {
                 .getProductById(cartItemDao.getProductDao().getProdId()).toDao());
         productInCartService.createProductInCart(cartItemDao.toModel());
 
-        return "redirect:/admin/carts/cart-item/{id}";
+        return "redirect:/admin/cart/cart-item/{id}";
     }
 
     @GetMapping("/delete-cart-item/{id}")

@@ -22,6 +22,11 @@ public class ProductService {
         prodRepo.save(product);
     }
 
+    public void updateProdByProdId(String prodId, Product product){
+        prodRepo.updateProductByProdId(prodId, product);
+    }
+
+
     public List<Product> getProducts(){
         return prodRepo.findAll();
 

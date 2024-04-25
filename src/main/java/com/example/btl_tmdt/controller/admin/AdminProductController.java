@@ -89,8 +89,10 @@ public class AdminProductController {
     }
 
     @PostMapping("/edit-product/{id}")
-    public String editProductPost(@ModelAttribute ProductDao productDao, Model model){
-        productService.saveProd(productDao.toModel());
+    public String editProductPost(@ModelAttribute ProductDao productDao, Model model, @PathVariable String id){
+//        productService.saveProd(productDao.toModel());
+        productService.updateProdByProdId(id, productDao.toModel());
+
         return "admin/product/products";
     }
 

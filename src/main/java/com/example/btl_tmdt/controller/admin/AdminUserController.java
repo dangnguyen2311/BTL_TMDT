@@ -76,4 +76,9 @@ public class AdminUserController {
 
         return "redirect:/admin/users";
     }
+
+    @GetMapping("/home")
+    public String getDashboard(Model model){
+        return "admin/home";
+    }
 }

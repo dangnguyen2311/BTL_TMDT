@@ -172,6 +172,24 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/user-detail")
+    public String userDetail(Model model){
+        String userName = (String) session.getAttribute("userName");
+
+        if(userName == null){
+            System.out.println("userDao is null");
+            return "redirect:/login";
+        }
+        else{
+            List<ProductDao> productDaos = productService.getProducts().stream().map(Product::toDao).collect(Collectors.toList());
+            model.addAttribute("productDaos", productDaos);
+            List<CategoryDao> categoryDaos = categoryService.getCategories().stream().map(Category::toDao).collect(Collectors.toList());
+            model.addAttribute("categoryDaos", categoryDaos);
+//            session.setAttribute("products", productService.getProducts());
+
+        }
+        return "client/profile_user";
+    }
 
 
 

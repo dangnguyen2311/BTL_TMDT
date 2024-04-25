@@ -53,18 +53,18 @@
 								</h3>
 								<p style="margin: 20px auto" th:text="${error}"></p>
 								<form class="row contact_form" th:action="@{/register}"
-									method="post" th:object="${userDTO}">
+									method="post" th:object="${userDao}">
 									<div class="col-md-12 form-group p_star">
 										<input type="text" class="form-control" id="name" name="name"
-											value="" th:field="*{username}" placeholder="Username" required>
+											value="" th:field="*{userName}" placeholder="Username" required>
 									</div>
 									<div class="col-md-12 form-group p_star">
 										<input type="text" class="form-control" id="email"
-											name="email" value="" th:field="*{email}" placeholder="Email" required>
+											name="email" value="" th:field="*{userEmail}" placeholder="Email" required>
 									</div>
 									<div class="col-md-12 form-group p_star">
 										<input type="password" class="form-control" id="password"
-											name="password" value="" th:field="*{password}"
+											name="password" value="" th:field="*{userPass}"
 											placeholder="Password" required>
 									</div>
 									<div class="col-md-12 form-group p_star">
@@ -81,6 +81,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 		</section>
 		<div class="shop-method-area">
 			<div class="container">

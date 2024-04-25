@@ -96,14 +96,14 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="orderItemDTO : ${productInOrderDaos}">
+											<tr th:each="productInOrderDao : ${productInOrderDaos}">
 <!--												<td th:text="${orderItemDTO.id}"></td>-->
-												<td th:text="${orderItemDTO.productDTO.name}"></td>
-												<td><img th:src="${orderItemDTO.productDTO.picture}" style="width: 140px; height: 140px"/></td>
-												<td th:text="${orderItemDTO.productDTO.categoryDTO.name}"></td>
-												<td th:text="${orderItemDTO.quantity}"></td>
+												<td th:text="${productInOrderDao.getProductDao().getProdName()}"></td>
+												<td><img th:src="${productInOrderDao.getProductDao().getProdImg()}" style="width: 140px; height: 140px"/></td>
+												<td th:text="${productInOrderDao.getProductDao().getCategoryDao().getCategory_name()}"></td>
+												<td th:text="${productInOrderDao.getQuantity()}"></td>
 												<td
-													th:text="${#numbers.formatDecimal(orderItemDTO.productDTO.price * orderItemDTO.quantity, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
+													th:text="${#numbers.formatDecimal(productInOrderDao.getProductDao().getProdPrice() * productInOrderDao.getQuantity(), 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
 											</tr>
 
 										</tbody>
@@ -114,6 +114,7 @@
 							<!-- /.card -->
 						</div>
 					</div>
+				</div>
 			</section>
 		</div>
 		

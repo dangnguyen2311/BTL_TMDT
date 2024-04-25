@@ -39,8 +39,7 @@ public class AdminOrderController {
     }
 
     @GetMapping("/order-item/{id}")
-    public String getProductInOrder (Model model,
-                                   @PathVariable(name = "id") String id) {
+    public String getProductInOrder (Model model, @PathVariable(name = "id") String id) {
 
         Order order = orderService.getOrderById(id);
 

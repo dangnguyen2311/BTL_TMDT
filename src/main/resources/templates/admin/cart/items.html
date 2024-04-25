@@ -77,25 +77,25 @@
 
 							<div class="card card-info">
 								<div class="card-header">
-									<h3 th:text="'Cart of ' + ${cartDTO.userDTO.username}"
+									<h3 th:text="'Cart of ' + ${cartDao.getUserDao().getUserName()}"
 										class="card-title"></h3>
 								</div>
 								<!-- /.card-header -->
 								<!-- form start -->
 								<form
-									th:action="@{/admin/carts/cart-item/{id}(id=${cartDTO.id})}"
+									th:action="@{/admin/cart/cart-item/{id}(id=${cartDao.id})}"
 									method="post">
 									<div class="card-body">
 										<div class="form-group">
 											<label>Select product add to cart</label> <select
-												th:field="${productInCartDaos.productDTO.id}" class="form-control">
-												<option th:each="productDTO : ${productDTOs}"
-													th:value="${productDTO.id}" th:text="${productDTO.name}"></option>
+												th:field="${productInCartDao.productDao.prodName}" class="form-control">
+												<option th:each="productDao : ${productDaos}"
+													th:value="${productDao.getProdId()}" th:text="${productDao.getProdName()}"></option>
 											</select>
 										</div>
 										<div class="form-group">
 											<label for="">Quantity</label> <input
-												th:field="${productInCartDaos.quantity}" type="number"
+												th:field="${productInCartDao.quantity}" type="number"
 												class="form-control" id="" placeholder="Enter quantity">
 										</div>
 
@@ -109,7 +109,7 @@
 
 								<div class="card-header">
 									<h3 class="card-title"
-										th:text="'List all product in ' + ${cartDTO.userDTO.username} + '\'s cart'"></h3>
+										th:text="'List all product in ' + ${cartDao.getUserDao().getUserName()} + '\'s cart'"></h3>
 
 								</div>
 								<!-- /.card-header -->
@@ -131,13 +131,13 @@
 												<td th:text="${productInCartDao.getId()}"></td>
 												<td th:text="${productInCartDao.getProductDao().getProdName()}"></td>
 												<td><img th:src="${productInCartDao.getProductDao().getProdImg()}" style="width: 140px; height: 140px"/></td>
-												<td th:text="${productInCartDao.getProductDao().getCategoryDao().category_name}"></td>
+												<td th:text="${productInCartDao.getProductDao().getCategoryDao().getCategory_name()}"></td>
 												<td th:text="${productInCartDao.getQuantity()}"></td>
 												<td
 													th:text="${#numbers.formatDecimal(productInCartDao.getProductDao().getProdPrice() * productInCartDao.getQuantity(), 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
 
 												<td><a class="btn btn-danger"
-													th:href="@{/admin/carts/delete-cart-item/{id}(id=${productInCartDao.id})}">Delete</a>
+													th:href="@{/admin/cart/delete-cart-item/{id}(id=${productInCartDao.getId()})}">Delete</a>
 												</td>
 											</tr>
 
