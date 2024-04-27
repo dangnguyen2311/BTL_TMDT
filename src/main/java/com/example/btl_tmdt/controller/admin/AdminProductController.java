@@ -89,11 +89,33 @@ public class AdminProductController {
     }
 
     @PostMapping("/edit-product/{id}")
-    public String editProductPost(@ModelAttribute ProductDao productDao, Model model, @PathVariable String id){
-//        productService.saveProd(productDao.toModel());
-        productService.updateProdByProdId(id, productDao.toModel());
+    public String editProductPost(Model model, @PathVariable(name = "id") String id,
+                                  @ModelAttribute(name = "productDao") ProductDao productDao,
+                                  @RequestParam("pictureFile") MultipartFile pictureFile) {
 
-        return "admin/product/products";
+        if (pictureFile.isEmpty()) {
+            Product product = productService.getProductById(id);
+            productDao.setProdImg(product.getProdImg());
+        }
+
+        else {
+            String fileName = StringUtils.cleanPath(pictureFile.getOriginalFilename());
+
+
+            String UPLOAD_DIR = "D:\\File Java\\src\\Term_2_2023_2024\\BTL_TMDT\\src\\main\\resources\\static\\image\\";
+
+            try {
+                Path path = Paths.get(UPLOAD_DIR + fileName);
+//                Files.copy(pictureFile.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            productDao.setProdImg("\\image\\" + fileName);
+        }
+
+        productService.editProduct(productDao.toModel(), id);
+        return "redirect:/admin/product";
     }
 
     @GetMapping("/delete-product/{id}")
@@ -110,8 +132,6 @@ public class AdminProductController {
                         .collect(Collectors.toList());
 
         model.addAttribute("productByNameList", productByNameList);
-
-
         return "admin/product/products";
     }
 

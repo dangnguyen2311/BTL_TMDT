@@ -46,6 +46,9 @@ public class AdminOrderController {
         List<ProductInOrderDao> productInOrderDaos = productInOrderService.getProductInOrder(order).stream()
                 .map(ProductInOrder::toDao).collect(Collectors.toList());
 
+        System.out.println("Order: " + order.getOrderId());
+        System.out.println("List product have " + productInOrderDaos.size() + " products");
+
         model.addAttribute("orderDao", order.toDao());
         model.addAttribute("productInOrderDaos", productInOrderDaos);
 

@@ -56,14 +56,15 @@ public class AdminCategoryController {
 
     @PostMapping("/edit-category/{id}")
     public String editCategoryPost(@PathVariable(name = "id") String id, Model model, @ModelAttribute("categoryDao") CategoryDao categoryDao){
-        Category category = categoryService.getCategoriesByname(categoryDao.getCategory_name());
+//        Category category = categoryService.getCategoriesByname(categoryDao.getCategory_name());
+        Category categoryToEdit = categoryService.getCategoryById(id);
+//        if (categoryToEdit != null) {
+//            model.addAttribute("error", "Category is existed in System");
+//            System.out.println("Category is existed in System");
+//            return "/admin/category/edit-category";
+//        }
 
-        if (category != null) {
-            model.addAttribute("error", "Category is existed in System");
-            System.out.println("Category is existed in System");
-            return "/admin/category/edit-category";
-        }
-        categoryService.editCategory(categoryDao.toModel());
+        categoryService.editCategory(categoryToEdit, categoryDao.toModel());
         return "redirect:/admin/category";
     }
 

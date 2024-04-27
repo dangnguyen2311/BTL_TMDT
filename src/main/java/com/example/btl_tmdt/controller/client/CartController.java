@@ -87,10 +87,24 @@ public class CartController {
         Cart cart = cartService.getCartByUser(user);
         Product product = productService.getProductById(id);
 
-        ProductInCart productInCart = new ProductInCart(cart, product, 1);
-        productInCart.setQuantity(quantity);
+        List<ProductInCart> productInCartList = productInCartService.getProductInCart(cart);
+        if(productInCartList.stream().anyMatch(e -> e.getProduct() == product)){
+            for(ProductInCart i: productInCartList){
+                if(i.getProduct().equals(product)){
+//                    i.setQuantity(i.getQuantity() + 1);
+                    productInCartService.updateProductInCart(i.getId(), i.getQuantity() + 1);
+                }
+            }
+        }
+        else{
+            ProductInCart productInCart = new ProductInCart(cart, product, 1);
+            productInCart.setQuantity(quantity);
+            productInCartService.createProductInCart(productInCart);
+        }
+//        if(productInCartService.isExistProductInCart(productInCart)){
+//            productInCartService.updateProductInCart(productInCart.getId(), productInCart.getQuantity() + 1);
+//        }
 
-        productInCartService.createProductInCart(productInCart);
 //        productInCartService.createNewCart();
 //        List<ProductInCartDao> productInCartDaos = productInCartService.getProductInCartByUser(user);
 

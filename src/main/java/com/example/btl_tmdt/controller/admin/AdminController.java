@@ -19,6 +19,11 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("")
+    public String getAdminHome(){
+        return "admin/home";
+    }
+
     @GetMapping("/login")
     public String adminLoginGet(Model model){
 

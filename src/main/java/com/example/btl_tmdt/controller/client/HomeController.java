@@ -41,7 +41,13 @@ public class HomeController {
 
     @GetMapping("")
     public String homeRedirect () {
-        return "redirect:/login";
+        String userName = (String) session.getAttribute("userName");
+
+        if(userName == null){
+            return "redirect:/login";
+        }
+
+        return "redirect:/page/1";
     }
 
     @GetMapping("/page/{id}")
@@ -91,6 +97,9 @@ public class HomeController {
             System.out.println("Login failed");
         }
         else if(userDao.getUserPass().equals(userDao1.getUserPass())){
+            if(userDao1.getUserRole().equals("2")){
+                return "redirect:/admin";
+            }
             System.out.println("Login successfully");
             session.setAttribute("userName", userDao1.getUserName());
             model.addAttribute("userDao", userDao1);
@@ -143,5 +152,17 @@ public class HomeController {
         session.removeAttribute("userName");
         return "redirect:/";
     }
+
+//    @GetMapping("/category/{name}")
+//    public String getProductByCategory(Model model, @PathVariable(name = "name") String name){
+//        CategoryDao categoryDaoByName = categoryService.getCategoriesByname(name).toDao();
+//        List<ProductDao> productDaoListByCategory = productService.getProductsByCategory(categoryDaoByName.toModel()).stream().map(Product::toDao).toList();
+//        List<CategoryDao> categoryDaos = categoryService.getCategories().stream().map(Category::toDao).collect(Collectors.toList());
+//
+//        model.addAttribute("categoryDaos", categoryDaos);
+//        model.addAttribute("categoryDao", categoryDaoByName);
+//        model.addAttribute("productDaos", productDaoListByCategory);
+//        return "/client/home";
+//    }
 
 }

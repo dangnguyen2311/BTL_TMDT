@@ -29,10 +29,12 @@ public class CategoryService {
         categoryRepo.delete(category);
     }
 
-    public void editCategory(Category category){
-        Category categoryToEdit = categoryRepo.findById(category.getCategoryId()).get();
+    public void editCategory(Category categoryToEdit, Category category){
+//        Category categoryToEdit = categoryRepo.findById(category.getCategoryId()).get();
+
         categoryToEdit.setCategoryName(category.getCategoryName());
         categoryToEdit.setCategoryDescription(category.getCategoryDescription());
+        categoryRepo.delete(category);
         categoryRepo.save(categoryToEdit);
     }
 

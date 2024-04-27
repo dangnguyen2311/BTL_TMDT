@@ -52,6 +52,7 @@ public class UserController {
             return "redirect:/login";
         }
         else{
+
             List<ProductDao> productDaos = productService.getProducts().stream().map(Product::toDao).collect(Collectors.toList());
             model.addAttribute("productDaos", productDaos);
             List<CategoryDao> categoryDaos = categoryService.getCategories().stream().map(Category::toDao).collect(Collectors.toList());
@@ -62,9 +63,9 @@ public class UserController {
         return "client/home";
     }
 
-    @GetMapping("/category/{id}")
+    @GetMapping("/category/{name}")
     public String getProductOfCategory (Model model, HttpSession session,
-                                        @PathVariable(name = "id") String name){
+                                        @PathVariable(name = "name") String name){
 
         CategoryDao categoryDao = categoryService.getCategoriesByname(name).toDao();
 

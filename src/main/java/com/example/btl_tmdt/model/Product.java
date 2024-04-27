@@ -26,6 +26,7 @@ public class Product  {
     private String prodId;
     private String prodName;
     private String prodDescription;
+    @Getter
     private Float prodPrice;
     private String prodNsx;
     @ManyToOne

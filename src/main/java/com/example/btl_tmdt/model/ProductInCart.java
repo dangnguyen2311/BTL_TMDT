@@ -20,7 +20,7 @@ public class ProductInCart  {
     @OneToOne
     private Product product;
 
-    @ManyToOne
+    @OneToOne
     private Cart cart;
 
 //    @OneToOne

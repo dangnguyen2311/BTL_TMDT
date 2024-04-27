@@ -22,6 +22,13 @@ public class CartService {
     }
 
     public Cart getCartByUser(User user) {
-        return cartRepo.getCartByUser(user);
+        Cart cart =  cartRepo.getCartByUser(user);
+        if(cart == null){
+            Cart newCart = new Cart();
+            newCart.setUser(user);
+            cartRepo.save(newCart);
+            return newCart;
+        }
+        return cart;
     }
 }

@@ -58,10 +58,10 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">Product</th>
-									<th scope="col">Price</th>
-									<th scope="col">Quantity</th>
-									<th scope="col">Total</th>
+									<th scope="col"><p>Product</p></th>
+									<th scope="col"><p>Price</p></th>
+									<th scope="col"><p>Quantity</p></th>
+									<th scope="col"><p>Total</p></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -87,7 +87,7 @@
 
 											<input name="quantity" type="number" th:value="${productInCartDao.getQuantity()}"
 												min="0" max="100">
-											<button class="genric-btn success circle">Cập nhật</button>
+											<button class="genric-btn success circle">Reset</button>
 										</form>
 									</td>
 									<td>
@@ -101,7 +101,7 @@
 									<td></td>
 									<td></td>
 									<td>
-										<h5>Subtotal</h5>
+										<h5><p>Subtotal</p></h5>
 									</td>
 									<td>
 										<h5 th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
@@ -111,9 +111,8 @@
 							</tbody>
 						</table>
 						<div class="checkout_btn_inner float-right">
-							<a class="btn_1" th:href="@{/}">Continue Shopping</a> <a
-								class="btn_1 checkout_btn_1" th:href="@{/checkout}">Proceed
-								to checkout</a>
+							<a class="btn_3 checkout_btn_1" th:href="@{/checkout}">Checkout</a>
+							<a class="btn_3" th:href="@{/}">Shopping</a>
 						</div>
 					</div>
 				</div>

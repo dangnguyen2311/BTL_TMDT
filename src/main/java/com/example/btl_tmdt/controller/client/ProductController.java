@@ -49,10 +49,10 @@ public class ProductController {
                               @PathVariable(name = "id") String id){
 
         List<CategoryDao> categoryDaos = categoryService.getCategories()
-                .stream().map(e -> e.toDao()).collect(Collectors.toList());
+                .stream().map(Category::toDao).collect(Collectors.toList());
 
         List<ProductDao> productDaoS = productService.getProducts().stream()
-                .map(e -> e.toDao()).collect(Collectors.toList());
+                .map(Product::toDao).collect(Collectors.toList());
 
         ProductDao productDao = productService.getProductById(id).toDao();
 

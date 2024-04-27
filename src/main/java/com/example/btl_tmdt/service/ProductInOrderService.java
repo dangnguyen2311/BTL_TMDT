@@ -21,7 +21,7 @@ public class ProductInOrderService {
     OrderRepo orderRepo;
 
     public List<ProductInOrder> getProductInOrder(Order order) {
-        return productInOrderRepo.getProductInOrdersByOrder(order);
+        return productInOrderRepo.findAllByOrder(order);
     }
 
     public void deleteOrder(Order order) {

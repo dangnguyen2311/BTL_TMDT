@@ -57,10 +57,10 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">Product</th>
-									<th scope="col">Price</th>
-									<th scope="col">Quantity</th>
-									<th scope="col">Total</th>
+									<th scope="col"><p>Product</p></th>
+									<th scope="col"><p>Price</p></th>
+									<th scope="col"><p>Quantity</p></th>
+									<th scope="col"><p>Total</p></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -68,16 +68,16 @@
 									<td>
 										<div class="media">
 											<div class="d-flex">
-												<img th:src="${productInOrderDao.getProduct().getProdImg()}" alt="" />
+												<img th:src="${productInOrderDao.getProductDao().getProdImg()}" alt="" />
 											</div>
 											<div class="media-body">
-												<p th:text="${productInOrderDao.getProduct().getProdName()}"></p>
+												<p th:text="${productInOrderDao.getProductDao().getProdName()}"></p>
 											</div>
 										</div>
 									</td>
 									<td>
 										<h5
-											th:text="${#numbers.formatDecimal(productInOrderDao.getProduct().getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+											th:text="${#numbers.formatDecimal(productInOrderDao.getProductDao().getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
 									</td>
 									<td>
 										<h5
@@ -85,7 +85,7 @@
 									</td>
 									<td>
 										<h5
-											th:text="${#numbers.formatDecimal(productInOrderDao.getQuantity() * productInOrderDao.getProduct().getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+											th:text="${#numbers.formatDecimal(productInOrderDao.getQuantity() * productInOrderDao.getProductDao().getProdPrice(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
 									</td>
 								</tr>
 
@@ -94,7 +94,7 @@
 									<td></td>
 									<td></td>
 									<td>
-										<h5>Subtotal</h5>
+										<h5><p>Subtotal</p></h5>
 									</td>
 									<td>
 										<h5 th:text="${#numbers.formatDecimal(orderDao.getTotal(), 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>

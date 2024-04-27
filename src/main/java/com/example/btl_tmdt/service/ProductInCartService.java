@@ -55,6 +55,15 @@ public class ProductInCartService {
         productInCartRepo.save(productInCart);
     }
 
+//    public void updateProductInCart(ProductInCart productInCart){
+//        productInCartRepo.save(productInCart);
+//    }
+
+    public boolean isExistProductInCart(ProductInCart productInCart){
+        List<ProductInCart> productInCartToFind = productInCartRepo.findAll();
+        return !productInCartToFind.isEmpty();
+    }
+
 
 //    public List<ProductInCartDao> getProductInCartByUser(User user) {
 //        productInCartRepo.

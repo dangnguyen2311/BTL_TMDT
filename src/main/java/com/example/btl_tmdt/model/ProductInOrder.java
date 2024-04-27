@@ -20,10 +20,11 @@ public class ProductInOrder {
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_order_id", unique = false)
     private Order order;
 
     @OneToOne
+    @JoinColumn(name = "product_prod_id", unique = false)
     private Product product;
 
     private Integer quantity;

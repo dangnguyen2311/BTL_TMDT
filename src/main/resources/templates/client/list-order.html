@@ -31,19 +31,19 @@
 
 <body>
 	<!--? Preloader Start -->
-	<div id="preloader-active">
-		<div
-			class="preloader d-flex align-items-center justify-content-center">
-			<div class="preloader-inner position-relative">
-				<div class="preloader-circle"></div>
-				<div class="preloader-img pere-text">
-					<img src="/client/assets/img/logo/logo.png" alt="">
-				</div>
-			</div>
-		</div>
-	</div>
+<!--	<div id="preloader-active">-->
+<!--		<div-->
+<!--			class="preloader d-flex align-items-center justify-content-center">-->
+<!--			<div class="preloader-inner position-relative">-->
+<!--				<div class="preloader-circle"></div>-->
+<!--				<div class="preloader-img pere-text">-->
+<!--					<img src="/client/assets/img/logo/logo.png" alt="">-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
 
-	<div th:insert="/client/fragment :: headerBox"></div>
+	<div th:insert="~{/client/fragment :: headerBox}"></div>
 
 	<main>
 
@@ -58,37 +58,35 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">ID</th>
-									<th scope="col">Receiver Name</th>
-									<th scope="col">Address</th>
-									<th scope="col">Time order</th>
-									<th scope="col">Phone number</th>
-									<th scope="col">Total Price</th>
-									<th scope="col">Action</th>
+									
+									<th scope="col"><p>Full Name</p></th>
+									<th scope="col"><p>Address</p></th>
+									<th scope="col"><p>Time order</p></th>
+									<th scope="col"><p>Phone number</p></th>
+									<th scope="col"><p>Total Price</p></th>
+									<th scope="col"><p>Action</p></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="orderDTO : ${orderDTOs}">
+								<tr th:each="orderDao : ${orderDaos}">
+									
 									<td>
-										<h5 th:text="${orderDTO.id}"></h5>
+										<p th:text="${orderDao.fullName}"></p>
 									</td>
 									<td>
-										<h5 th:text="${orderDTO.receiverFullname}"></h5>
+										<p th:text="${orderDao.address}"></p>
 									</td>
 									<td>
-										<h5 th:text="${orderDTO.receiverAddress}"></h5>
+										<p th:text="${orderDao.order_time}"></p>
 									</td>
 									<td>
-										<h5 th:text="${orderDTO.timeOrder}"></h5>
+										<p th:text="${orderDao.phone}"></p>
 									</td>
 									<td>
-										<h5 th:text="${orderDTO.receiverPhone}"></h5>
+										<p th:text="${#numbers.formatDecimal(orderDao.total, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></p>
 									</td>
 									<td>
-										<h5 th:text="${#numbers.formatDecimal(orderDTO.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
-									</td>
-									<td>
-										<a class="genric-btn circle medium info" th:href="@{/my-order/detail/{id}(id=${orderDTO.id})}">List Product</a> 
+										<a class="genric-btn circle medium info" th:href="@{/my-order/detail/{id}(id=${orderDao.getOrderId()})}">List Product</a>
 									</td>
 								</tr>
 
@@ -111,9 +109,9 @@
 	</main>
 
 
-	<div th:insert="/client/fragment :: footerBox"></div>
+	<div th:insert="~{/client/fragment :: footerBox}"></div>
 
-	<div th:insert="/client/fragment :: searchBox"></div>
+	<div th:insert="~{/client/fragment :: searchBox}"></div>
 
 	<!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->

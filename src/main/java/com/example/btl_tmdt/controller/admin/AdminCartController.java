@@ -77,12 +77,12 @@ public class AdminCartController {
     @PostMapping("/cart-item/{id}")
     public String addItemOfCart (Model model,
                                  @PathVariable(name = "id") String id
-            , @ModelAttribute(name = "cartItemDao") ProductInCartDao cartItemDao) {
+            , @ModelAttribute(name = "productInCartDao") ProductInCartDao productInCartDao) {
 
-        cartItemDao.setCartDao(cartService.getCartById(id).toDao());
-        cartItemDao.setProductDao(productService
-                .getProductById(cartItemDao.getProductDao().getProdId()).toDao());
-        productInCartService.createProductInCart(cartItemDao.toModel());
+        productInCartDao.setCartDao(cartService.getCartById(id).toDao());
+        productInCartDao.setProductDao(productService
+                .getProductById(productInCartDao.getProductDao().getProdId()).toDao());
+        productInCartService.createProductInCart(productInCartDao.toModel());
 
         return "redirect:/admin/cart/cart-item/{id}";
     }
