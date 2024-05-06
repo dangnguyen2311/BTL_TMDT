@@ -18,9 +18,11 @@ public class UserDao {
     private String userPass;
     private String userRole;
     private String userPhone;
+    private String userFullName;
+    private String userAddress;
 
     public User toModel(){
-        return new User(userId, userName, userEmail, userPass, userRole, userPhone);
+        return new User(userId, userName, userEmail, userPass, userRole, userPhone, userFullName, userAddress);
     }
 
 }

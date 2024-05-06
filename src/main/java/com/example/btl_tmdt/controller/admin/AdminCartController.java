@@ -35,6 +35,7 @@ public class AdminCartController {
     @GetMapping("")
     public String cartList(Model model){
         List<CartDao> cartDaoList = cartService.getAllCart().stream().map(Cart::toDao).collect(Collectors.toList());
+//        List<Cart> cartDaoList = cartService.getAllCart();
         model.addAttribute("cartDaos", cartDaoList);
 
         return "admin/cart/carts";

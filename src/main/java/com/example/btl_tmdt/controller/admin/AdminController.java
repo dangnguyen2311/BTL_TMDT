@@ -1,7 +1,14 @@
 package com.example.btl_tmdt.controller.admin;
 
+import com.example.btl_tmdt.dao.OrderDao;
+import com.example.btl_tmdt.model.Cart;
+import com.example.btl_tmdt.model.Order;
+import com.example.btl_tmdt.model.Product;
 import com.example.btl_tmdt.model.User;
 import com.example.btl_tmdt.repository.UserRepo;
+import com.example.btl_tmdt.service.CartService;
+import com.example.btl_tmdt.service.OrderService;
+import com.example.btl_tmdt.service.ProductService;
 import com.example.btl_tmdt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,14 +20,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("")
-    public String getAdminHome(){
+    public String getAdminHome(Model model){
+        List<Product> products = productService.getProducts();
+        List<Cart> carts = cartService.getAllCart();
+        List<User> users = userService.getUsers();
+        List<OrderDao> orders = orderService.getOrders();
+        model.addAttribute("numberOfProduct", products.size());
+        model.addAttribute("numberOfCart", carts.size());
+        model.addAttribute("numberOfUser", users.size());
+        model.addAttribute("numberOfOrder", orders.size());
         return "admin/home";
     }
 

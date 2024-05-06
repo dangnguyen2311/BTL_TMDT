@@ -182,16 +182,41 @@ public class UserController {
             return "redirect:/login";
         }
         else{
+            UserDao userDao = (UserDao) userService.getUserByUserName(userName).toDao();
             List<ProductDao> productDaos = productService.getProducts().stream().map(Product::toDao).collect(Collectors.toList());
             model.addAttribute("productDaos", productDaos);
             List<CategoryDao> categoryDaos = categoryService.getCategories().stream().map(Category::toDao).collect(Collectors.toList());
             model.addAttribute("categoryDaos", categoryDaos);
 //            session.setAttribute("products", productService.getProducts());
+            model.addAttribute("userDao", userDao);
 
         }
         return "client/profile_user";
     }
+    @GetMapping("/user-detail/save-user")
+    public String saveEditUserGet(Model model, @RequestParam("fullName") String fullName,
+                                  @RequestParam("phone") String phone,
+                                  @RequestParam("address") String address){
+        String userName = (String) session.getAttribute("userName");
+        UserDao userDao = userService.getUserByUserName(userName).toDao();
+        System.out.println("full name: " + fullName + "phone: "+ phone + "address: " + address);
+        model.addAttribute("userName", userDao);
+        return "client/profile_user";
+    }
+    @PostMapping("/user-detail/save-user")
+    public String saveEditUserPost(Model model,    @RequestParam("fullName") String fullName,
+                                               @RequestParam("phone") String phone,
+                                               @RequestParam("address") String address){
+        String userName = (String) session.getAttribute("userName");
+        UserDao userDao = userService.getUserByUserName(userName).toDao();
+        System.out.println(fullName+phone+address);
+        userDao.setUserFullName(fullName);
+        userDao.setUserPhone(phone);
+        userDao.setUserAddress(address);
+        userService.updateUser(userDao);
 
-
-
+        model.addAttribute("userName", userName);
+        model.addAttribute("userDao", userDao);
+        return "client/profile_user";
+    }
 }

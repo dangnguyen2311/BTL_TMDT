@@ -48,6 +48,11 @@ public class UserService {
         userRepo.save(user);
     }
 
+    public void updateUser(UserDao userDao) {
+        User userOld = userRepo.getUserByUserName(userDao.getUserName());
+        userRepo.updateUserInfo(userOld.getUserId(), userDao.getUserFullName(), userDao.getUserPhone(), userDao.getUserAddress());
+    }
+
 //    public void editUser(String username, UserDao userDao) {
 //        userRepo.updateUserByUserName(username);
 //    }

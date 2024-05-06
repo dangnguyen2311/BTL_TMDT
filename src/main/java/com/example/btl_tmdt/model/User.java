@@ -20,25 +20,31 @@ public class User {
     private String userPass;
     private String userRole;
     private String userPhone;
+    private String userFullName;
+    private String userAddress;
 
-    public User(String userName, String userPass, String userEmail, String userRole, String userPhone) {
+    public User(String userName, String userPass, String userEmail, String userRole, String userPhone, String userFullName, String userAddress) {
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPass = userPass;
         this.userRole = userRole;
         this.userPhone = userPhone;
+        this.userFullName = userFullName;
+        this.userAddress = userAddress;
     }
 
-    public User(String userName, String userPass, String userEmail, String userPhone) {
+    public User(String userName, String userPass, String userEmail, String userPhone, String userFullName, String userAddress) {
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPass = userPass;
         this.userRole = "1";
         this.userPhone = userPhone;
+        this.userFullName = userFullName;
+        this.userAddress = userAddress;
     }
 
     public UserDao toDao(){
-        return new UserDao(userId, userName, userEmail, userPass, userRole, userPhone);
+        return new UserDao(userId, userName, userEmail, userPass, userRole, userPhone, userFullName, userAddress);
     }
 
 }
