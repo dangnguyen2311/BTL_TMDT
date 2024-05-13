@@ -57,16 +57,17 @@ public class AdminUserController {
 
     @PostMapping("/edit-user/{id}")
     public String editUserPost(@ModelAttribute UserDao userDao, @PathVariable(name = "id") String id, Model model){
-        UserDao userDao1 = userService.getUserByUserName(userDao.getUserName()).toDao();
-        UserDao userDao2 = userService.getUserByEmail(userDao.getUserEmail()).toDao();
+//        UserDao userDao1 = userService.getUserByUserName(userDao.getUserName()).toDao();
+//        UserDao userDao2 = userService.getUserByEmail(userDao.getUserEmail()).toDao();
 
-        if(userDao1 != null || userDao2 != null){
-            System.out.println("Email or Username already existed");
-            model.addAttribute("error", "Email or Username already existed");
-            return "admin/user/edit-user";
-        }
+//        if(userDao1 != null || userDao2 != null){
+//            System.out.println("Email or Username already existed");
+//            model.addAttribute("error", "Email or Username already existed");
+//            return "admin/user/edit-user";
+//        }
+//        System.out.println(userDao.getUserFullName());
 
-        userService.saveUser(userDao.toModel());
+        userService.updateUser(userDao);
         return "redirect:/admin/users";
     }
 

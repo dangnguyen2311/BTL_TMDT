@@ -15,9 +15,7 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepo.save(user);
-//        if(userRepo.findById(user.getUserId()).isEmpty()){
-//            userRepo.save(user);
-//        }
+//        userRepo.saveUser(user.getUserId(), user.getUserName(), user.getUserPhone(), user.getUserAddress());
     }
 
     public User getUserByEmail(String userEmail) {

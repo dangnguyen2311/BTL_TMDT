@@ -99,7 +99,13 @@
 <!--											<td th:text="${userDao.getUserId()}"></td>-->
 											<td th:text="${userDao.getUserName()}"></td>
 											<td th:text="${userDao.getUserEmail()}"></td>
-											<td th:text="${userDao.getUserRole()}"></td>
+<!--											<td th:text="${userDao.getUserRole()}"></td>-->
+											<td>
+												<span th:switch="${userDao.getUserRole()}">
+													<span th:case="2">Admin</span>
+													<span th:case="1">Client</span>
+												</span>
+											</td>
 											<td><a
 												th:href="@{/admin/users/edit-user/{id}(id=${userDao.getUserId()})}"
 												class="btn btn-success">Edit</a> <a

@@ -27,4 +27,9 @@ public interface UserRepo extends JpaRepository<User, String> {
     @Modifying
     void updateUserInfo(@Param("userId") String userId, @Param("fullName") String fullName, @Param("phone") String phone, @Param("address") String address);
 
+//    @Query(value = "UPDATE btl_web.users SET user_full_name = :fullName, user_phone = :phone, user_address = :address WHERE user_id = :userId", nativeQuery = true)
+//    @Transactional
+//    @Modifying
+//    void saveUser(@Param("userId") String userId, @Param("fullName") String fullName, @Param("phone") String phone, @Param("address") String address);
+
 }

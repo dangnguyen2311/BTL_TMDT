@@ -51,6 +51,7 @@ public class UserController {
             System.out.println("userDao is null");
             return "redirect:/login";
         }
+
         else{
 
             List<ProductDao> productDaos = productService.getProducts().stream().map(Product::toDao).collect(Collectors.toList());

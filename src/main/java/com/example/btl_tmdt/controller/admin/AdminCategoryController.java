@@ -71,7 +71,7 @@ public class AdminCategoryController {
     @GetMapping("/delete-category/{id}")
     public String deleteCategory(Model model, @PathVariable(name = "id") String id) {
         categoryService.deleteCategory(categoryService.getCategoryById(id));
-        return "redirect:/admin/category/";
+        return "redirect:/admin/category";
     }
 
 }

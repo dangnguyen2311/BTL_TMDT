@@ -10,6 +10,7 @@ import com.example.btl_tmdt.service.CartService;
 import com.example.btl_tmdt.service.OrderService;
 import com.example.btl_tmdt.service.ProductService;
 import com.example.btl_tmdt.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,8 @@ public class AdminController {
     private CartService cartService;
     @Autowired
     private OrderService orderService;
+
+    HttpSession session;
 
     @GetMapping("")
     public String getAdminHome(Model model){
@@ -65,5 +68,11 @@ public class AdminController {
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Login failed");
+    }
+
+    @GetMapping("/logout")
+    public String adminLogout(Model model){
+        session.removeAttribute("userName");
+        return "client/login";
     }
 }

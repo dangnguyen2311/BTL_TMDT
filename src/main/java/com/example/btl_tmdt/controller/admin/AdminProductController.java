@@ -6,6 +6,7 @@ import com.example.btl_tmdt.model.Category;
 import com.example.btl_tmdt.model.Product;
 import com.example.btl_tmdt.service.CategoryService;
 import com.example.btl_tmdt.service.ProductService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,6 +87,13 @@ public class AdminProductController {
         model.addAttribute("productDao", productDao);
         model.addAttribute("categoryDaos", categoryDaos);
         return "admin/product/edit-product";
+    }
+
+    @GetMapping("/search")
+    public String searchProd(@PathParam(value = "productName") String productname, Model model){
+        List<ProductDao> productDaoListByName = productService.findProductByName(productname).stream().map(Product::toDao).toList();
+        model.addAttribute("productDaos", productDaoListByName);
+        return "admin/product/products";
     }
 
     @PostMapping("/edit-product/{id}")

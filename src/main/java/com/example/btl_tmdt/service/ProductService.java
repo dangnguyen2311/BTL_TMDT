@@ -1,7 +1,5 @@
 package com.example.btl_tmdt.service;
 
-import com.example.btl_tmdt.dao.CategoryDao;
-import com.example.btl_tmdt.dao.ProductDao;
 import com.example.btl_tmdt.model.Category;
 import com.example.btl_tmdt.model.Product;
 import com.example.btl_tmdt.repository.CategoryRepo;
@@ -58,8 +56,9 @@ public class ProductService {
 //        prodRepo.deleteById(product.getProdId());
 //    }
 
-    public Optional<ProductDao> findProductByName(String prodName){
-        return prodRepo.findProductByProdName(prodName).map(Product::toDao);
+
+    public Optional<Product> findProductByName(String productName){
+        return prodRepo.findProductByProdName(productName);
     }
 
     public void editProduct(Product product, String id) {

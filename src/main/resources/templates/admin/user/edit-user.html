@@ -88,7 +88,13 @@
 							<div class="form-group">
 								<label for="exampleInputEmail1">Username</label> <input
 									type="text" class="form-control" name="username"
-									th:field="*{userName}" placeholder="Enter username" required>
+									th:field="*{userName}" placeholder="Enter username" readonly>
+							</div>
+
+							<div class="form-group">
+								<label for="exampleInputEmail1">Fullname</label> <input
+									type="text" class="form-control" name="Fullname"
+									th:field="*{userFullName}" placeholder="Enter Fullname" >
 							</div>
 
 							<div class="form-group">
@@ -100,7 +106,17 @@
 							<div class="form-group">
 								<label for="exampleInputEmail1">Email</label> <input
 									type="email" class="form-control" name="email"
-									th:field="*{userEmail}" placeholder="Enter email" required>
+									th:field="*{userEmail}" placeholder="Enter email" readonly>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Phone</label> <input
+									type="text" class="form-control" name="phone"
+									th:field="*{userPhone}" placeholder="Enter Phone" >
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Address</label> <input
+									type="text" class="form-control" name="address"
+									th:field="*{userAddress}" placeholder="Enter Address" >
 							</div>
 
 							<div class="form-group">
