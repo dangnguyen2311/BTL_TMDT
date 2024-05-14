@@ -1,15 +1,15 @@
 package com.example.btl_tmdt.controller.admin;
 
-import com.example.btl_tmdt.dao.CartDao;
-import com.example.btl_tmdt.dao.ProductDao;
-import com.example.btl_tmdt.dao.ProductInCartDao;
-import com.example.btl_tmdt.dao.ProductInOrderDao;
+import com.example.btl_tmdt.dao.*;
 import com.example.btl_tmdt.model.Cart;
 import com.example.btl_tmdt.model.Product;
 import com.example.btl_tmdt.model.ProductInCart;
+import com.example.btl_tmdt.model.User;
 import com.example.btl_tmdt.service.CartService;
 import com.example.btl_tmdt.service.ProductInCartService;
 import com.example.btl_tmdt.service.ProductService;
+import com.example.btl_tmdt.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +31,22 @@ public class AdminCartController {
     
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private HttpSession session;
+    public boolean checkUser(){
+        User user = (User) userService.getUserByUserName((String) session.getAttribute("userName"));
+        return user.getUserRole().equals("2");
+    }
 
     @GetMapping("")
     public String cartList(Model model){
+        if(!checkUser()){
+            model.addAttribute("userDao", new UserDao());
+            return "client/login";
+        }
+
         List<CartDao> cartDaoList = cartService.getAllCart().stream().map(Cart::toDao).collect(Collectors.toList());
 //        List<Cart> cartDaoList = cartService.getAllCart();
         model.addAttribute("cartDaos", cartDaoList);
@@ -44,7 +57,10 @@ public class AdminCartController {
     @GetMapping("/cart-item/{id}")
     public String listItemOfCart (Model model,
                                   @PathVariable(name = "id") String id) {
-
+        if(!checkUser()){
+            model.addAttribute("userDao", new UserDao());
+            return "client/login";
+        }
         List<ProductInCart> productInCarts = productInCartService.getProductInCart(
                 cartService.getCartById(id));
         List<ProductInCartDao> productInCartDaos = productInCarts.stream()
@@ -79,7 +95,6 @@ public class AdminCartController {
     public String addItemOfCart (Model model,
                                  @PathVariable(name = "id") String id
             , @ModelAttribute(name = "productInCartDao") ProductInCartDao productInCartDao) {
-
         productInCartDao.setCartDao(cartService.getCartById(id).toDao());
         productInCartDao.setProductDao(productService
                 .getProductById(productInCartDao.getProductDao().getProdId()).toDao());
@@ -92,7 +107,10 @@ public class AdminCartController {
     public String deleteItemOfCart (Model model,
                                     RedirectAttributes redirectAttributes,
                                     @PathVariable(name = "id") String id) {
-
+        if(!checkUser()){
+            model.addAttribute("userDao", new UserDao());
+            return "client/login";
+        }
         ProductInCart cartItem = productInCartService.getProductInCartById(id);
         CartDao cartDao = cartItem.toDao().getCartDao();
 

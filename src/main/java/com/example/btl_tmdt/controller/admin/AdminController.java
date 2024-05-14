@@ -37,10 +37,18 @@ public class AdminController {
     private OrderService orderService;
 
     @Autowired
-    HttpSession session ;
+    HttpSession session;
+    public boolean checkUser(){
+        User user = (User) userService.getUserByUserName((String) session.getAttribute("userName"));
+        return user.getUserRole().equals("2");
+    }
 
     @GetMapping("")
     public String getAdminHome(Model model){
+        if(!checkUser()){
+            model.addAttribute("userDao", new UserDao());
+            return "client/login";
+        }
         List<Product> products = productService.getProducts();
         List<Cart> carts = cartService.getAllCart();
         List<User> users = userService.getUsers();

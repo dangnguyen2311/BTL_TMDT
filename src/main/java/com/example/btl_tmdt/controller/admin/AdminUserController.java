@@ -4,6 +4,7 @@ import com.example.btl_tmdt.dao.UserDao;
 import com.example.btl_tmdt.model.User;
 import com.example.btl_tmdt.service.CartService;
 import com.example.btl_tmdt.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,19 @@ import java.util.List;
 public class AdminUserController {
     @Autowired
     UserService userService;
+    @Autowired
+    HttpSession session;
+    public boolean checkUser(){
+        User user = (User) userService.getUserByUserName((String) session.getAttribute("userName"));
+        return user.getUserRole().equals("2");
+    }
 
     @GetMapping("")
     public String getAllUser(Model model){
+        if(!checkUser()){
+            model.addAttribute("userDao", new UserDao());
+            return "client/login";
+        }
         List<UserDao> userDaoList = userService.getUsers().stream().map(User::toDao).toList();
         model.addAttribute("userDaos", userDaoList);
 
@@ -27,6 +38,10 @@ public class AdminUserController {
 
     @GetMapping("/add-user")
     public String addUserGet(Model model){
+        if(!checkUser()){
+            model.addAttribute("userDao", new UserDao());
+            return "client/login";
+        }
         UserDao userDao = new UserDao();
         model.addAttribute("userDao", userDao);
 
@@ -50,6 +65,10 @@ public class AdminUserController {
 
     @GetMapping("/edit-user/{id}")
     public String editUserGet(@PathVariable(name = "id") String id, Model model){
+        if(!checkUser()){
+            model.addAttribute("userDao", new UserDao());
+            return "client/login";
+        }
         UserDao userDao = userService.getUserByUserId(id).toDao();
         model.addAttribute("userDao", userDao);
 
