@@ -89,6 +89,12 @@
 									type="text" class="form-control" name="userName"
 									th:field="*{userName}" placeholder="Enter username" required>
 							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Fullname</label> <!--/*@thymesVar id="getUserName" type="com.example.btl_tmdt.dao.*"*/-->
+								<input
+										type="text" class="form-control" name="userFullName"
+										th:field="*{userFullName}" placeholder="Enter fullname" required>
+							</div>
 
 							<div class="form-group">
 								<label for="exampleInputEmail1">Password</label>
@@ -102,6 +108,12 @@
 									<input
 										type="email" class="form-control" name="userEmail"
 										th:field="*{userEmail}" placeholder="Enter email" required>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Address</label> <!--/*@thymesVar id="getUserName" type="com.example.btl_tmdt.dao.*"*/-->
+								<input
+										type="text" class="form-control" name="address"
+										th:field="*{userAddress}" placeholder="Enter address" required>
 							</div>
 
 							<div class="form-group">
