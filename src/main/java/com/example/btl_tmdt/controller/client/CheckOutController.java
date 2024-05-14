@@ -128,7 +128,10 @@ public class CheckOutController {
         List<CategoryDao> categoryDaos = categoryService.getCategories().stream().map(Category::toDao).collect(Collectors.toList());
 
         List<ProductInOrderDao> productInOrderDaos = productInOrderService.getByOrder(order).stream().map(ProductInOrder::toDao).collect(Collectors.toList());
-
+        for(ProductInOrderDao i: productInOrderDaos){
+            System.out.println(i.getProductDao().getProdName());
+        }
+        System.out.println(productInOrderDaos.size());
         model.addAttribute("categoryDaos", categoryDaos);
         model.addAttribute("orderDao", order.toDao());
         model.addAttribute("productInOrderDaos", productInOrderDaos);

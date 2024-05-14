@@ -47,10 +47,10 @@ public class HomeController {
             return "redirect:/login";
         }
 
-        return "redirect:/page/1";
+        return "redirect:/slide/1";
     }
 
-    @GetMapping("/page/{id}")
+    @GetMapping("/slide/{id}")
     public String home (Model model, HttpSession session,
                         @PathVariable("id") Integer id) {
 
@@ -90,20 +90,26 @@ public class HomeController {
 
     @PostMapping("/login")
     public String getHomePost(@ModelAttribute("userDao") UserDao userDao, Model model){
-        UserDao userDao1 = userService.getUserByEmail(userDao.getUserEmail()).toDao();
+        User user1 = userService.getUserByEmail(userDao.getUserEmail());
+
 //        UserDao userDao2 =
-        if(userDao1 == null){
+        if(user1 == null){
             model.addAttribute("error", "Login failed");
             System.out.println("Login failed");
         }
-        else if(userDao.getUserPass().equals(userDao1.getUserPass())){
-            if(userDao1.getUserRole().equals("2")){
-                return "redirect:/admin";
+        else{
+            UserDao userDao1 = user1.toDao();
+            if(userDao.getUserPass().equals(userDao1.getUserPass())){
+                if(userDao1.getUserRole().equals("2")){
+                    session.setAttribute("userName", userDao1.getUserName());
+                    model.addAttribute("userName", userDao1.getUserName());
+                    return "redirect:/admin";
+                }
+                System.out.println("Login successfully");
+                session.setAttribute("userName", userDao1.getUserName());
+                model.addAttribute("userDao", userDao1);
+                return "redirect:/slide/1";
             }
-            System.out.println("Login successfully");
-            session.setAttribute("userName", userDao1.getUserName());
-            model.addAttribute("userDao", userDao1);
-            return "redirect:/page/1";
         }
         return "client/login";
     }

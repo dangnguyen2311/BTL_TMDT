@@ -2,6 +2,7 @@ package com.example.btl_tmdt.controller.admin;
 
 import com.example.btl_tmdt.dao.UserDao;
 import com.example.btl_tmdt.model.User;
+import com.example.btl_tmdt.service.CartService;
 import com.example.btl_tmdt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +35,10 @@ public class AdminUserController {
     @PostMapping("/add-user")
     public String addNewUserPost(Model model, @ModelAttribute(name = "userDao") UserDao userDao) {
 
-        User user0 = userService.getUserByUserName(userDao.getUserName());
-        User user1 = userService.getUserByEmail(userDao.getUserEmail());
+        User userByUserName = userService.getUserByUserName(userDao.getUserName());
+        User userByUserEmail = userService.getUserByEmail(userDao.getUserEmail());
 
-        if (user0 != null || user1 != null) {
+        if (userByUserName != null || userByUserEmail != null) {
             model.addAttribute("error", "Username or Email is existed in System");
             return "/admin/user/add-user";
         }
@@ -73,6 +74,7 @@ public class AdminUserController {
 
     @GetMapping("/delete-user/{id}")
     public String deleteUserGet(@PathVariable(name = "id") String id, Model model){
+
         userService.deleteUser(id);
 
         return "redirect:/admin/users";

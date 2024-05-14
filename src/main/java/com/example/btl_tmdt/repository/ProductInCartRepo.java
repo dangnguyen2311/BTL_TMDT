@@ -11,5 +11,7 @@ import java.util.List;
 public interface ProductInCartRepo extends JpaRepository<ProductInCart, String> {
 
     List<ProductInCart> getProductInCartByCart(Cart cart);
+
+    void deleteAllByCart(Cart cart);
 //    List<ProductInCart> getProductInCartBy
 }

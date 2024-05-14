@@ -1,5 +1,6 @@
 package com.example.btl_tmdt.service;
 
+import com.example.btl_tmdt.dao.UserDao;
 import com.example.btl_tmdt.model.Cart;
 import com.example.btl_tmdt.model.User;
 import com.example.btl_tmdt.repository.CartRepo;
@@ -30,5 +31,9 @@ public class CartService {
             return newCart;
         }
         return cart;
+    }
+
+    public void addCart(UserDao userDao) {
+        cartRepo.save(new Cart(userDao.toModel()));
     }
 }

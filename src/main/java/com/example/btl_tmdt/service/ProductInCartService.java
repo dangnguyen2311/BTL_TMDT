@@ -64,6 +64,10 @@ public class ProductInCartService {
         return !productInCartToFind.isEmpty();
     }
 
+    public void deleteProductInCartByUser(Cart cart) {
+        productInCartRepo.deleteAllByCart(cart);
+    }
+
 
 //    public List<ProductInCartDao> getProductInCartByUser(User user) {
 //        productInCartRepo.

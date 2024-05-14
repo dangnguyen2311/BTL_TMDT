@@ -13,4 +13,7 @@ public interface ProductInOrderRepo extends JpaRepository<ProductInOrder, String
     List<ProductInOrder> getProductInOrdersByOrder(Order order);
 
     List<ProductInOrder> findAllByOrder(Order order);
+
+//    void deleteByOrder(Order order);
+    void deleteProductInOrderByOrder(Order order);
 }

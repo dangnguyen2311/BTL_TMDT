@@ -1,6 +1,7 @@
 package com.example.btl_tmdt.controller.admin;
 
 import com.example.btl_tmdt.dao.OrderDao;
+import com.example.btl_tmdt.dao.UserDao;
 import com.example.btl_tmdt.model.Cart;
 import com.example.btl_tmdt.model.Order;
 import com.example.btl_tmdt.model.Product;
@@ -35,7 +36,8 @@ public class AdminController {
     @Autowired
     private OrderService orderService;
 
-    HttpSession session;
+    @Autowired
+    HttpSession session ;
 
     @GetMapping("")
     public String getAdminHome(Model model){
@@ -47,6 +49,7 @@ public class AdminController {
         model.addAttribute("numberOfCart", carts.size());
         model.addAttribute("numberOfUser", users.size());
         model.addAttribute("numberOfOrder", orders.size());
+
         return "admin/home";
     }
 
@@ -73,6 +76,7 @@ public class AdminController {
     @GetMapping("/logout")
     public String adminLogout(Model model){
         session.removeAttribute("userName");
-        return "client/login";
+        model.addAttribute("userDao", new UserDao());
+        return "redirect:/login";
     }
 }

@@ -22,6 +22,10 @@ public class Cart  {
     @OneToOne
     private User user;
 
+    public Cart(User user){
+        this.user = user;
+    }
+
     public CartDao toDao(){
         return new CartDao(id, user.toDao());
     }

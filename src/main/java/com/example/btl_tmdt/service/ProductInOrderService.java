@@ -21,7 +21,8 @@ public class ProductInOrderService {
     OrderRepo orderRepo;
 
     public List<ProductInOrder> getProductInOrder(Order order) {
-        return productInOrderRepo.findAllByOrder(order);
+        return  productInOrderRepo.getProductInOrdersByOrder(order);
+//        return productInOrderRepo.findAllByOrder(order);
     }
 
     public void deleteOrder(Order order) {
@@ -38,5 +39,9 @@ public class ProductInOrderService {
     public List<ProductInOrder> getByOrder(Order order) {
         return productInOrderRepo.findAllByOrder(order);
 
+    }
+
+    public void deleteProductInOrderByUser(List<Order> orderToDeleteList) {
+        orderToDeleteList.forEach(order -> productInOrderRepo.deleteProductInOrderByOrder(order));
     }
 }
