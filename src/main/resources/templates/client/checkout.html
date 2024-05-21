@@ -25,19 +25,6 @@
 </head>
 
 <body>
-	<!--? Preloader Start -->
-<!--	<div id="preloader-active">-->
-<!--		<div-->
-<!--			class="preloader d-flex align-items-center justify-content-center">-->
-<!--			<div class="preloader-inner position-relative">-->
-<!--				<div class="preloader-circle"></div>-->
-<!--				<div class="preloader-img pere-text">-->
-<!--					<img src="/client/assets/img/logo/logo.png" alt="">-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-
 	<div th:insert="~{/client/fragment :: headerBox}"></div>
 
 	<main>
@@ -115,7 +102,7 @@
 										<li><a href="#">Subtotal <span
 												th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></span>
 										</a></li>
-										<li><a href="#">Shipping <span>Flat rate:
+										<li><a href="#">Shipping <span>
 													50.000 VNĐ</span>
 										</a></li>
 										<li><a href="#">Total <span

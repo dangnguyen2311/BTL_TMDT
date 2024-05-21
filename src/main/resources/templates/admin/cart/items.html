@@ -38,12 +38,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 
-		<!-- Preloader -->
-<!--		<div-->
-<!--			class="preloader flex-column justify-content-center align-items-center">-->
-<!--			<img class="animation__shake" src="/admin/dist/img/AdminLTELogo.png"-->
-<!--				alt="AdminLTELogo" height="60" width="60">-->
-<!--		</div>-->
 
 		<div th:insert="~{/admin/fragment/sidebar :: navbar}"></div>
 
@@ -76,37 +70,6 @@
 						<div class="card">
 
 							<div class="card card-info">
-<!--								<div class="card-header">-->
-<!--									<h3 th:text="'Cart of ' + ${cartDao.getUserDao().getUserName()}"-->
-<!--										class="card-title"></h3>-->
-<!--								</div>-->
-								<!-- /.card-header -->
-								<!-- form start -->
-<!--								<form-->
-<!--									th:action="@{/admin/cart/cart-item/{id}(id=${cartDao.id})}"-->
-<!--									method="post">-->
-<!--									<div class="card-body">-->
-<!--										<div class="form-group">-->
-<!--											<label>Select product add to cart</label> <select-->
-<!--												th:field="${productInCartDao.productDao.prodName}" class="form-control">-->
-<!--												<option th:each="productDao : ${productDaos}"-->
-<!--													th:value="${productDao.getProdId()}" th:text="${productDao.getProdName()}"></option>-->
-<!--											</select>-->
-<!--										</div>-->
-<!--										<div class="form-group">-->
-<!--											<label for="">Quantity</label> <input-->
-<!--												th:field="${productInCartDao.quantity}" type="number"-->
-<!--												class="form-control" id="" placeholder="Enter quantity">-->
-<!--										</div>-->
-
-<!--										<div class="card-footer">-->
-<!--											<button type="submit" class="btn btn-info">Submit</button>-->
-<!--										</div>-->
-<!--									</div>-->
-
-<!--								</form>-->
-
-
 								<div class="card-header">
 									<h3 class="card-title"
 										th:text="'List all product in ' + ${cartDao.getUserDao().getUserName()} + '\'s cart'"></h3>
@@ -117,7 +80,6 @@
 									<table class="table table-bordered table-hover text-nowrap">
 										<thead>
 											<tr>
-<!--												<th>ID</th>-->
 												<th>Name</th>
 												<th>Picture</th>
 												<th>Category</th>
@@ -152,9 +114,6 @@
 				</div>
 			</section>
 		</div>
-		
-<!--		<div th:insert="/admin/fragment/sidebar :: footer"></div>-->
-		
 		<aside class="control-sidebar control-sidebar-dark">
 			<!-- Control sidebar content goes here -->
 		</aside>
@@ -194,9 +153,6 @@
 		src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="/admin/dist/js/adminlte.js"></script>
-	<!-- AdminLTE for demo purposes -->
-<!--	<script src="/admin/dist/js/demo.js"></script>-->
-	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="/admin/dist/js/pages/dashboard.js"></script>
 </body>
 </html>

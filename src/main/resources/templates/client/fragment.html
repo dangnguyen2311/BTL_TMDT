@@ -33,11 +33,6 @@
 												th:text="${categoryDao.getCategory_name()}"></a>
 											</li>
 										</ul></li>
-									<!--  <li th:if="${session.userName != null}"><a
-										th:href="@{/profile}">Profile</a></li>
-									<li th:if="${session.userName == null}"><a
-										th:href="@{/login}">Profile</a></li>
-										-->
 									<li th:if="${session.userName != null}"><a
 										th:href="@{/my-cart}">My cart</a></li>
 									<li th:if="${session.userName == null}"><a

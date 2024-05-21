@@ -38,12 +38,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 
-		<!-- Preloader -->
-<!--		<div-->
-<!--			class="preloader flex-column justify-content-center align-items-center">-->
-<!--			<img class="animation__shake" src="/admin/dist/img/AdminLTELogo.png"-->
-<!--				alt="AdminLTELogo" height="60" width="60">-->
-<!--		</div>-->
 
 		<div th:insert="~{/admin/fragment/sidebar :: navbar}"></div>
 
@@ -82,14 +76,12 @@
 								<table class="table table-hover text-nowrap table-bordered">
 									<thead>
 										<tr>
-<!--											<th>ID</th>-->
 											<th>User's</th>
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="cartDao : ${cartDaos}">
-<!--											<td th:text="${cartDao.id}"></td>-->
 											<td th:text="${cartDao.getUserDao().getUserName()}"></td>
 											<td><a
 												th:href="@{/admin/cart/cart-item/{id}(id=${cartDao.getId()})}"
@@ -107,9 +99,6 @@
 				</div>
 			</section>
 		</div>
-		
-<!--		<div th:insert="/admin/fragment/sidebar :: footer"></div>-->
-		
 		<aside class="control-sidebar control-sidebar-dark">
 			<!-- Control sidebar content goes here -->
 		</aside>
@@ -149,9 +138,6 @@
 		src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="/admin/dist/js/adminlte.js"></script>
-	<!-- AdminLTE for demo purposes -->
-<!--	<script src="/admin/dist/js/demo.js"></script>-->
-	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="/admin/dist/js/pages/dashboard.js"></script>
 </body>
 </html>

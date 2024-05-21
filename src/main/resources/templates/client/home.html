@@ -70,17 +70,6 @@
 								<div class="single-popular-items mb-50 text-center">
 									<div class="popular-img">
 										<img th:src="${productDao.getProdImg()}" alt="">
-<!--										<a th:if="${session.userName == null}" th:href="@{/login}">-->
-<!--											<div class="img-cap">-->
-<!--												<span>Add to cart</span>-->
-<!--											</div>-->
-<!--										</a>-->
-<!--										<a th:if="${session.userName != null}" th:href="@{/add-to-cart(id=${productDao.getProdId()}, quantity=1)}">-->
-<!--											<div class="img-cap">-->
-<!--												<span>Add to cart</span>-->
-<!--											</div>-->
-<!--										</a>-->
-
 										<a  th:href="@{/add-to-cart(id=${productDao.getProdId()}, quantity=1)}">
 											<div class="img-cap">
 												<span>Add to cart</span>

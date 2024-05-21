@@ -84,7 +84,7 @@ public class AdminOrderController {
 
         productInOrderService.deleteOrder(order);
 
-        return "redirect:/admin/orders";
+        return "redirect:/admin/order";
     }
 
 //    @PostMapping("/item")

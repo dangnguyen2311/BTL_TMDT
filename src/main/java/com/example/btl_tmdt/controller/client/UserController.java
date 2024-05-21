@@ -192,7 +192,7 @@ public class UserController {
             model.addAttribute("userDao", userDao);
 
         }
-        return "client/profile_user";
+        return "client/profile-user";
     }
     @GetMapping("/user-detail/save-user")
     public String saveEditUserGet(Model model, @RequestParam("fullName") String fullName,
@@ -202,7 +202,7 @@ public class UserController {
         UserDao userDao = userService.getUserByUserName(userName).toDao();
         System.out.println("full name: " + fullName + "phone: "+ phone + "address: " + address);
         model.addAttribute("userName", userDao);
-        return "client/profile_user";
+        return "client/profile-user";
     }
     @PostMapping("/user-detail/save-user")
     public String saveEditUserPost(Model model,    @RequestParam("fullName") String fullName,
@@ -218,6 +218,6 @@ public class UserController {
 
         model.addAttribute("userName", userName);
         model.addAttribute("userDao", userDao);
-        return "client/profile_user";
+        return "client/profile-user";
     }
 }
